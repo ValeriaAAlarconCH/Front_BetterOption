@@ -1,0 +1,42 @@
+/* Encabezado */
+h1 {
+  margin: 0;
+  padding: 10px;
+  font-size: 2em;
+  color: #2c3e50;
+  text-align: center;
+}
+
+h2 {
+  margin: 0;
+  padding: 5px;
+  font-size: 1.2em;
+  color: #34495e;
+  text-align: center;
+}
+
+/* Barra de navegación */
+nav {
+  background-color: #2980b9; /* azul fuerte */
+  padding: 10px;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #f1c40f; /* amarillo dorado al pasar el mouse */
+}
+
+/* Línea divisora entre links opcional */
+nav a + a::before {
+  content: "|";
+  color: white;
+  margin: 0 5px;
+}
