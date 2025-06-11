@@ -1,3 +1,24 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
+import {Principal} from './components/principal/principal';
+import {Listarproducto} from './components/producto/listarproducto/listarproducto';
+import {Nuevoeditaproducto} from './components/producto/nuevoeditaproducto/nuevoeditaproducto';
+import {
+  Listarcatalogopromociones
+} from './components/catalogopromociones/listarcatalogopromociones/listarcatalogopromociones';
+import {Listarmicroempresa} from './components/microempresa/listarmicroempresa/listarmicroempresa';
+import {Listarnotificacion} from './components/notificacion/listarnotificacion/listarnotificacion';
+import {Listarusuario} from './components/usuario/listarusuario/listarusuario';
+import {Listarwishlist} from './components/wishlist/listarwishlist/listarwishlist';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  {path : '', component: Principal},
+
+  {path : 'productos', component: Listarproducto},
+  {path : 'productos/registrar', component: Nuevoeditaproducto},
+
+  {path : 'microempresas', component: Listarmicroempresa},
+  {path : 'descuentos', component: Listarcatalogopromociones},
+  {path : 'usuarios', component: Listarusuario},
+  {path : 'wishlists', component: Listarwishlist},
+  {path : 'notificaciones', component: Listarnotificacion},
+];
