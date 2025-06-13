@@ -9,6 +9,8 @@ import {Listarmicroempresa} from './components/microempresa/listarmicroempresa/l
 import {Listarnotificacion} from './components/notificacion/listarnotificacion/listarnotificacion';
 import {Listarusuario} from './components/usuario/listarusuario/listarusuario';
 import {Listarwishlist} from './components/wishlist/listarwishlist/listarwishlist';
+import {Listarcategoria} from './components/categoria/listarcategoria/listarcategoria';
+import {Nuevoeditacategoria} from './components/categoria/nuevoeditacategoria/nuevoeditacategoria';
 
 export const routes: Routes = [
   {path : '', component: Principal},
@@ -21,4 +23,6 @@ export const routes: Routes = [
   {path : 'usuarios', component: Listarusuario},
   {path : 'wishlists', component: Listarwishlist},
   {path : 'notificaciones', component: Listarnotificacion},
+  {path : 'categorias', component: Listarcategoria},
+  // {path : 'categorias/registrar', component: Nuevoeditacategoria},
 ];
