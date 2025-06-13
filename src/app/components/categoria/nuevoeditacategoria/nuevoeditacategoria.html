@@ -1,1 +1,18 @@
-<p>nuevoeditacategoria works!</p>
+<mat-card class="example-card">
+  <mat-card-title>Formulario de Categorias</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="categoriaForm" class="form-container"  (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>NombreCategoria</mat-label>
+        <input  matInput  formControlName="nombreCategoria" placeholder="Ingrese su nueva Categoria" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Descripcion</mat-label>
+        <input matInput formControlName="descripcion" placeholder="Ingrese la descripcion" />
+      </mat-form-field>
+
+      <button type="submit" mat-raised-button color="primary">Registrar</button>
+    </form>
+  </mat-card-content>
+</mat-card>
