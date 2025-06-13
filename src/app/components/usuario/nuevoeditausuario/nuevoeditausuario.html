@@ -1,1 +1,36 @@
-<p>nuevoeditausuario works!</p>
+<mat-card class="example-card">
+  <mat-card-title>Formulario de Usuarios</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="usuarioForm" class="form-container"  (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input  matInput  formControlName="nombre" placeholder="Ingrese el nuevo usuario" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Correo</mat-label>
+        <input matInput formControlName="correo" placeholder="Ingrese su correo" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" placeholder="Ingrese su contraseña" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Rol</mat-label>
+        <input matInput formControlName="rol" placeholder="Ingrese el rol" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>FechaRegistro</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaRegistro" placeholder=“Fecha“/>
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <button type="submit" mat-raised-button color="primary">Registrar</button>
+    </form>
+  </mat-card-content>
+</mat-card>
