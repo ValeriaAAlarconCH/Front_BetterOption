@@ -14,22 +14,22 @@ export class UsuarioService {
 
   constructor() { }
     list():Observable<any> {
-      return this.httpClient.get<Usuario[]>(this.url+"/usuarios")
+      return this.httpClient.get<Usuario[]>(this.url+"/usuarios/listar")
     }
   listId(id: number): Observable<any> {
-    console.log(this.url + "/usuario/"+ id);
-    return this.httpClient.get<Usuario>(this.url+"/usuario/"+id);
+    console.log(this.url + "/usuarios/listarid/"+ id);
+    return this.httpClient.get<Usuario>(this.url+"/usuarios/listarid/"+id);
   }
   insert(usuario:Usuario){
     console.log(usuario);
-    return this.httpClient.post(this.url+"/usuario", usuario)
+    return this.httpClient.post(this.url+"/usuarios/registrar", usuario)
   }
 
   update(usuario:Usuario): Observable<any>{
-    return this.httpClient.put(this.url + "/usuario", usuario);
+    return this.httpClient.put(this.url + "/usuarios/actualizar", usuario);
   }
   delete(id: number): Observable<any>{
-    return this.httpClient.delete(this.url + "/usuario/" + id);
+    return this.httpClient.delete(this.url + "/usuarios/eliminar/" + id);
   }
   setList(listaNueva: Usuario[]) {
     this.listaCambio.next(listaNueva); //envia la nueva lista a los suscriptores
