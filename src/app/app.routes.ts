@@ -22,7 +22,7 @@ export const routes: Routes = [
   {path : 'microempresas', component: Listarmicroempresa},
   {path : 'descuentos', component: Listarcatalogopromociones},
   {path : 'usuarios', component: Listarusuario},
-  // {path : 'usuarios/registrar', component: Nuevoeditausuario},
+  {path : 'usuarios/registrar', component: Nuevoeditausuario},
   {path : 'wishlists', component: Listarwishlist},
   {path : 'notificaciones', component: Listarnotificacion},
   {path : 'categorias', component: Listarcategoria},
