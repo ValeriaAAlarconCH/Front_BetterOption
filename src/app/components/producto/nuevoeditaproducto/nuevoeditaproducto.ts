@@ -53,7 +53,7 @@ export class Nuevoeditaproducto {
 
   constructor() {
     this.productoForm = this.fb.group({
-      id_Producto: [''],
+      id_producto: [''],
       nombreProducto : ['', Validators.required],
       descripcion : ['', Validators.required],
       precio: ['', Validators.required],
@@ -105,7 +105,7 @@ export class Nuevoeditaproducto {
   onSubmit() {
     if (this.productoForm.valid) {
       const producto: Producto = new Producto();
-      producto.id_Producto = this.id;
+      producto.id_producto = this.id;
       producto.nombreProducto = this.productoForm.value.nombreProducto;
       producto.descripcion = this.productoForm.value.descripcion;
       producto.precio = this.productoForm.value.precio;

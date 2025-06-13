@@ -2,7 +2,7 @@ import {Microempresa} from './microempresa';
 import {Categoria} from './categoria';
 
 export class Producto {
-  id_Producto: number;
+  id_producto: number;
   nombreProducto: string;
   descripcion: string;
   precio: number;

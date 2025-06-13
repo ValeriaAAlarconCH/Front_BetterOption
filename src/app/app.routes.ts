@@ -12,6 +12,7 @@ import {Listarwishlist} from './components/wishlist/listarwishlist/listarwishlis
 import {Listarcategoria} from './components/categoria/listarcategoria/listarcategoria';
 import {Nuevoeditacategoria} from './components/categoria/nuevoeditacategoria/nuevoeditacategoria';
 import {Nuevoeditausuario} from './components/usuario/nuevoeditausuario/nuevoeditausuario';
+import {Nuevoeditawishlist} from './components/wishlist/nuevoeditawishlist/nuevoeditawishlist';
 
 export const routes: Routes = [
   {path : '', component: Principal},
@@ -24,6 +25,7 @@ export const routes: Routes = [
   {path : 'usuarios', component: Listarusuario},
   {path : 'usuarios/registrar', component: Nuevoeditausuario},
   {path : 'wishlists', component: Listarwishlist},
+  {path : 'wishlists/registrar', component: Nuevoeditawishlist},
   {path : 'notificaciones', component: Listarnotificacion},
   {path : 'categorias', component: Listarcategoria},
   {path : 'categorias/registrar', component: Nuevoeditacategoria},
