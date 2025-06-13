@@ -24,5 +24,5 @@ export const routes: Routes = [
   {path : 'wishlists', component: Listarwishlist},
   {path : 'notificaciones', component: Listarnotificacion},
   {path : 'categorias', component: Listarcategoria},
-  // {path : 'categorias/registrar', component: Nuevoeditacategoria},
+  {path : 'categorias/registrar', component: Nuevoeditacategoria},
 ];
