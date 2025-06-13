@@ -13,7 +13,7 @@ import {
   MatTableDataSource
 } from '@angular/material/table';
 import {MatSort, MatSortHeader} from '@angular/material/sort';
-import {Router, RouterLink} from '@angular/router';
+import {Router} from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
 import {ProductoService} from '../../../services/ProductoService';
 import {Producto} from '../../../models/producto';
@@ -42,7 +42,7 @@ import {Producto} from '../../../models/producto';
 })
 export class Listarproducto {
   lista: Producto[] = [];
-  displayedColumns: string[] = ['id_Producto', 'nombreProducto', 'descripcion','precio', 'stock', 'imagen'];
+  displayedColumns: string[] = ['id_Producto', 'nombreProducto', 'descripcion', 'categoria', 'precio', 'stock', 'microempresa', 'imagen'];
   dataSource: MatTableDataSource<Producto> = new MatTableDataSource<Producto>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
