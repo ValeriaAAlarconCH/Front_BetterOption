@@ -8,6 +8,6 @@ export class Producto {
   precio: number;
   stock: number;
   imagen: string;
-  microempresa: Microempresa = new Microempresa();
-  categoria: Categoria = new Categoria();
+  microempresadto: Microempresa = new Microempresa();
+  categoriadto: Categoria = new Categoria();
 }
