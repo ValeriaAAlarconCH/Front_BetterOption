@@ -5,7 +5,6 @@ import {Nuevoeditaproducto} from './components/producto/nuevoeditaproducto/nuevo
 import {
   Listarcatalogopromociones
 } from './components/catalogopromociones/listarcatalogopromociones/listarcatalogopromociones';
-import {Listarmicroempresa} from './components/microempresa/listarmicroempresa/listarmicroempresa';
 import {Listarnotificacion} from './components/notificacion/listarnotificacion/listarnotificacion';
 import {Listarusuario} from './components/usuario/listarusuario/listarusuario';
 import {Listarwishlist} from './components/wishlist/listarwishlist/listarwishlist';
@@ -13,14 +12,14 @@ import {Listarcategoria} from './components/categoria/listarcategoria/listarcate
 import {Nuevoeditacategoria} from './components/categoria/nuevoeditacategoria/nuevoeditacategoria';
 import {Nuevoeditausuario} from './components/usuario/nuevoeditausuario/nuevoeditausuario';
 import {Nuevoeditawishlist} from './components/wishlist/nuevoeditawishlist/nuevoeditawishlist';
+import {NuevoeditarmicroempresaComponent} from './components/microempresa/nuevoeditamicroempresa/nuevoeditamicroempresa';
+import { ListarmicroempresaComponent } from './components/microempresa/listarmicroempresa/listarmicroempresa';
 
 export const routes: Routes = [
   {path : '', component: Principal},
 
   {path : 'productos', component: Listarproducto},
   {path : 'productos/registrar', component: Nuevoeditaproducto},
-
-  {path : 'microempresas', component: Listarmicroempresa},
   {path : 'descuentos', component: Listarcatalogopromociones},
   {path : 'usuarios', component: Listarusuario},
   {path : 'usuarios/registrar', component: Nuevoeditausuario},
@@ -29,4 +28,7 @@ export const routes: Routes = [
   {path : 'notificaciones', component: Listarnotificacion},
   {path : 'categorias', component: Listarcategoria},
   {path : 'categorias/registrar', component: Nuevoeditacategoria},
-];
+  { path: 'microempresas/registrar', component: NuevoeditarmicroempresaComponent },
+  { path: 'microempresas', redirectTo: 'microempresas/registrar', pathMatch: 'full' },
+  { path: 'microempresas/listar', component: ListarmicroempresaComponent },
+]
