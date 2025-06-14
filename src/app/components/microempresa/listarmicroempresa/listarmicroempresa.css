@@ -1,0 +1,82 @@
+body {
+  background-color: #e0f7ff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 30px;
+}
+
+.formulario, .imagen {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 8px;
+  border: 1px solid #90caf9;
+  margin-bottom: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+li.selected {
+  background-color: #bbdefb;
+  font-weight: bold;
+}
+
+.acciones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn {
+  background-color: #b3e5fc;
+  border: 2px solid black;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  flex: 1;
+  margin: 0 5px;
+}
+
+.btn.eliminar {
+  background-color: #ffcccc;
+}
+
+.imagen img {
+  width: 250px;
+  display: block;
+  margin: 0 auto 15px auto;
+}
+
+.footer {
+  background-color: #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.footer a {
+  margin: 0 15px;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}

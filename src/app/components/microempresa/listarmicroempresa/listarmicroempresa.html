@@ -1,1 +1,30 @@
-<p>listarmicroempresa works!</p>
+<div class="container">
+  <div class="formulario">
+    <h2>Microempresas</h2>
+    <ul>
+      <li
+        *ngFor="let item of microempresas; let i = index"
+        [class.selected]="indiceSeleccionado === i"
+        (click)="seleccionar(i)">
+        {{ item.nombre }}
+      </li>
+    </ul>
+    <div class="acciones">
+      <button class="btn" (click)="verMas()">Ver más</button>
+      <button class="btn" (click)="confirmarSeleccion()">Seleccionar</button>
+      <button class="btn eliminar" (click)="eliminar()">Eliminar</button>
+    </div>
+  </div>
+
+  <div class="imagen">
+    <img src="assets/img/market.jpeg" alt="Imagen microempresa" />
+    <br />
+    <button class="btn" (click)="volver()">Volver</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <a href="#">Términos</a>
+  <a href="#">Privacidad</a>
+  <a href="#">Contacto</a>
+</footer>
