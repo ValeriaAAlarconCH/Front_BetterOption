@@ -1,0 +1,62 @@
+body {
+  background-color: #e0f7ff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 30px;
+}
+
+.formulario, .imagen {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.formulario h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+input {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #a3d9ff;
+  border-radius: 5px;
+}
+
+.btn-registrar {
+  background-color: #b3e5fc;
+  border: 2px solid black;
+  padding: 10px 20px;
+  width: 100%;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.imagen img {
+  width: 250px;
+  display: block;
+  margin: 0 auto 15px auto;
+}
+
+.footer {
+  background-color: #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.footer a {
+  margin: 0 15px;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}

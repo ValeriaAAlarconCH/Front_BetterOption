@@ -1,1 +1,23 @@
-<p>nuevoeditamicroempresa works!</p>
+<div class="container">
+  <div class="formulario">
+    <h2>Registrar Microempresa</h2>
+    <input type="text" placeholder="Nombre del negocio" [(ngModel)]="microempresa.nombreNegocio">
+    <input type="text" placeholder="Rubro" [(ngModel)]="microempresa.rubro">
+    <input type="text" placeholder="Dirección" [(ngModel)]="microempresa.direccion">
+    <input type="text" placeholder="Teléfono" [(ngModel)]="microempresa.telefono">
+    <input type="email" placeholder="Email" [(ngModel)]="microempresa.email">
+    <button class="btn-registrar" (click)="registrarMicroempresa()">Registrar</button>
+  </div>
+
+  <div class="imagen">
+    <img src="assets/img/market.jpeg" alt="Imagen microempresa">
+    <button class="btn-registrar" (click)="irAListaMicroempresas()">Microempresas</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <a href="#">Términos</a>
+  <a href="#">Privacidad</a>
+  <a href="#">Contacto</a>
+</footer>
+
