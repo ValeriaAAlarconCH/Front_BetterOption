@@ -1,1 +1,32 @@
-<p>nuevoeditacatalogopromociones works!</p>
+<mat-card class="form-card">
+  <mat-card-title>{{ edicion ? 'Editar Promoción' : 'Registrar Nueva Promoción' }}</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Descripción</mat-label>
+        <input matInput formControlName="descripcion" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Descuento (%)</mat-label>
+        <input matInput type="number" formControlName="precio" min="1" />
+      </mat-form-field>
+
+      <div class="button-group">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+          {{ edicion ? 'Actualizar' : 'Guardar' }}
+        </button>
+
+        <button mat-stroked-button type="button" (click)="router.navigate(['/catalogopromociones'])">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
