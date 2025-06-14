@@ -14,12 +14,13 @@ import {Nuevoeditacategoria} from './components/categoria/nuevoeditacategoria/nu
 import {Nuevoeditausuario} from './components/usuario/nuevoeditausuario/nuevoeditausuario';
 import {Nuevoeditawishlist} from './components/wishlist/nuevoeditawishlist/nuevoeditawishlist';
 
+const NotificacionesComponent = () =>
+  import('./components/notificacion/listarnotificacion/notificacion').then(m => m.NotificacionComponent);
+
 export const routes: Routes = [
-  {path : '', component: Principal},
-
-  {path : 'productos', component: Listarproducto},
-  {path : 'productos/registrar', component: Nuevoeditaproducto},
-
+  { path: '', component: Principal },
+  { path: 'productos', component: Listarproducto },
+  { path: 'productos/registrar', component: Nuevoeditaproducto },
   {path : 'microempresas', component: Listarmicroempresa},
   {path : 'descuentos', component: Listarcatalogopromociones},
   {path : 'usuarios', component: Listarusuario},
@@ -29,4 +30,5 @@ export const routes: Routes = [
   {path : 'notificaciones', component: Listarnotificacion},
   {path : 'categorias', component: Listarcategoria},
   {path : 'categorias/registrar', component: Nuevoeditacategoria},
+
 ];
