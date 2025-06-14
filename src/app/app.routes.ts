@@ -13,6 +13,9 @@ import { Nuevoeditawishlist } from './components/wishlist/nuevoeditawishlist/nue
 import { Listarcategoria } from './components/categoria/listarcategoria/listarcategoria';
 import { Nuevoeditacategoria } from './components/categoria/nuevoeditacategoria/nuevoeditacategoria';
 
+const NotificacionesComponent = () =>
+  import('./components/notificacion/listarnotificacion/notificacion').then(m => m.NotificacionComponent);
+
 export const routes: Routes = [
   { path: '', component: Principal },
 
