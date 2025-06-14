@@ -42,7 +42,7 @@ import {Producto} from '../../../models/producto';
 })
 export class Listarproducto {
   lista: Producto[] = [];
-  displayedColumns: string[] = ['id_Producto', 'nombreProducto', 'descripcion', 'categoria', 'precio', 'stock', 'microempresa', 'imagen'];
+  displayedColumns: string[] = ['id_producto', 'nombreProducto', 'descripcion', 'categoria', 'precio', 'stock', 'microempresa', 'imagen'];
   dataSource: MatTableDataSource<Producto> = new MatTableDataSource<Producto>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
