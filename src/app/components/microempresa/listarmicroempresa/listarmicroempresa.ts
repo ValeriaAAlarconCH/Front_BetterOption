@@ -28,7 +28,10 @@ export class ListarmicroempresaComponent implements OnInit {
     this.http.get<any[]>('http://localhost:8080/microempresas/listar')
       .subscribe({
         next: (data) => {
-          this.microempresas = data;
+          console.log('⚠️ Datos recibidos del backend:', data);
+
+          const eliminados = JSON.parse(localStorage.getItem('eliminados') || '[]');
+          this.microempresas = data.filter(m => !eliminados.includes(m.id_microempresa));
         },
         error: (err) => {
           console.error('Error al obtener microempresas:', err);
@@ -44,7 +47,7 @@ export class ListarmicroempresaComponent implements OnInit {
   confirmarSeleccion() {
     if (this.indiceSeleccionado !== null) {
       const seleccionada = this.microempresas[this.indiceSeleccionado];
-      alert(`Seleccionaste: ${seleccionada.nombre_negocio}`);
+      alert(`Seleccionaste: ${seleccionada.nombreNegocio}`);
     } else {
       alert('Por favor, selecciona una microempresa primero.');
     }
@@ -53,7 +56,7 @@ export class ListarmicroempresaComponent implements OnInit {
   verMas() {
     if (this.indiceSeleccionado !== null) {
       const seleccionada = this.microempresas[this.indiceSeleccionado];
-      alert(`Detalles:\nNombre: ${seleccionada.nombre_negocio}\nRubro: ${seleccionada.rubro}\nDirección: ${seleccionada.direccion}`);
+      alert(`Detalles:\nNombre: ${seleccionada.nombreNegocio}\nRubro: ${seleccionada.rubro}\nDirección: ${seleccionada.direccion}`);
     } else {
       alert('Selecciona una microempresa para ver más información.');
     }
@@ -61,19 +64,17 @@ export class ListarmicroempresaComponent implements OnInit {
 
   eliminar() {
     if (this.indiceSeleccionado !== null) {
-      const id = this.microempresas[this.indiceSeleccionado].idMicroempresa;
-      this.http.delete(`http://localhost:8080/microempresas/eliminar/${id}`)
-        .subscribe({
-          next: () => {
-            alert('Microempresa eliminada');
-            this.cargarMicroempresas(); // recarga la lista
-            this.indiceSeleccionado = null;
-          },
-          error: (err) => {
-            console.error('Error al eliminar microempresa:', err);
-            alert('No se pudo eliminar la microempresa.');
-          }
-        });
+      const microempresaEliminada = this.microempresas[this.indiceSeleccionado];
+      const id = microempresaEliminada.id_microempresa;
+
+      const eliminados = JSON.parse(localStorage.getItem('eliminados') || '[]');
+      eliminados.push(id);
+      localStorage.setItem('eliminados', JSON.stringify(eliminados));
+
+      this.microempresas.splice(this.indiceSeleccionado, 1);
+      this.indiceSeleccionado = null;
+
+      alert(`Microempresa "${microempresaEliminada.nombreNegocio}" eliminada visualmente.`);
     } else {
       alert('Selecciona una microempresa para eliminar.');
     }
