@@ -1,18 +1,22 @@
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import {MatTable, MatTableDataSource} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+
 import { Catalogopromociones } from '../../../models/catalogopromociones';
 import { CatalogoPromocionesService } from '../../../services/CatalogoPromocionesService';
 
 @Component({
   selector: 'app-listarcatalogopromociones',
+  standalone: true,
   templateUrl: './listarcatalogopromociones.html',
+  styleUrl: './listarcatalogopromociones.css',
   imports: [
-    MatPaginator,
-    MatTable
-  ],
-  styleUrl: './listarcatalogopromociones.css'
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
+  ]
 })
 export class Listarcatalogopromociones implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'precio'];
