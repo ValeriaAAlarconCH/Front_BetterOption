@@ -1,81 +1,139 @@
+/* Fondo general */
 body {
-  background-color: #e0f7ff;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-.container {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  padding: 30px;
-}
-
-.formulario, .imagen {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-weight: bold;
-}
-
-ul {
-  list-style-type: none;
+  font-family: Arial, sans-serif;
+  background-color: #5dcbe8;
+  margin: 0;
   padding: 0;
 }
 
-li {
-  padding: 8px;
-  border: 1px solid #90caf9;
-  margin-bottom: 5px;
+/* Contenedor principal */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 50px;
+  padding: 40px 20px;
+  flex-wrap: wrap;
+}
+
+/* Panel de listado */
+.listado {
+  background-color: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 350px;
+}
+
+.listado h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+/* Lista de microempresas */
+.lista {
+  border: 1px solid #5dcbe8;
+  padding: 0;
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.lista li {
+  padding: 10px;
+  border-bottom: 1px solid #5dcbe8;
   cursor: pointer;
   text-align: center;
+  transition: background-color 0.3s;
 }
 
-li.selected {
-  background-color: #bbdefb;
+.lista li:hover {
+  background-color: #e1f6fc;
+}
+
+.lista li.seleccionado {
+  background-color: #b2e1ec;
   font-weight: bold;
 }
 
-.acciones {
+/* Botones */
+.botones {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.btn {
-  background-color: #b3e5fc;
-  border: 2px solid black;
+.botones button {
+  flex: 1;
+  min-width: 100px;
   padding: 10px;
-  cursor: pointer;
+  font-size: 14px;
   font-weight: bold;
   border-radius: 5px;
-  flex: 1;
-  margin: 0 5px;
+  border: 2px solid black;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.btn.eliminar {
-  background-color: #ffcccc;
+.btn-vermas {
+  background-color: #cde7eb;
+}
+
+.btn-seleccionar {
+  background-color: #b2e1ec;
+}
+
+.btn-eliminar {
+  background-color: #f2b6b6;
+}
+
+.botones button:hover {
+  opacity: 0.9;
+}
+
+/* Imagen decorativa */
+.imagen {
+  text-align: center;
 }
 
 .imagen img {
-  width: 250px;
-  display: block;
-  margin: 0 auto 15px auto;
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
-.footer {
-  background-color: #ddd;
+/* Botón volver */
+.btn-volver {
+  margin-top: 20px;
+  background-color: #b2e1ec;
+  color: black;
+  border: 2px solid black;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-volver:hover {
+  background-color: #94d4e3;
+}
+
+/* Footer */
+footer {
+  background-color: #dcdcdc;
   padding: 10px;
   text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
-.footer a {
-  margin: 0 15px;
+footer a {
+  margin: 0 10px;
   color: black;
   text-decoration: none;
   font-weight: bold;

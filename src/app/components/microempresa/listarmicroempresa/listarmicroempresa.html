@@ -1,29 +1,33 @@
 <div class="container">
-  <div class="formulario">
+  <!-- Panel de listado -->
+  <div class="listado">
     <h2>Microempresas</h2>
-    <ul>
-      <li
-        *ngFor="let item of microempresas; let i = index"
-        [class.selected]="indiceSeleccionado === i"
-        (click)="seleccionar(i)">
-        {{ item.nombre }}
+    <ul class="lista">
+      <li *ngFor="let item of microempresas; let i = index"
+          [class.seleccionado]="i === indiceSeleccionado"
+          (click)="seleccionar(i)">
+        {{ item.nombreNegocio }}
       </li>
     </ul>
-    <div class="acciones">
-      <button class="btn" (click)="verMas()">Ver más</button>
-      <button class="btn" (click)="confirmarSeleccion()">Seleccionar</button>
-      <button class="btn eliminar" (click)="eliminar()">Eliminar</button>
+
+    <!-- Botones de acción -->
+    <div class="botones">
+      <button class="btn-vermas" (click)="verMas()">Ver más</button>
+      <button class="btn-seleccionar" (click)="confirmarSeleccion()">Seleccionar</button>
+      <button class="btn-eliminar" (click)="eliminar()">Eliminar</button>
     </div>
   </div>
 
+  <!-- Imagen y botón volver -->
   <div class="imagen">
-    <img src="assets/img/market.jpeg" alt="Imagen microempresa" />
+    <img src="assets/img/microempresa.png" alt="Imagen microempresa" />
     <br />
-    <button class="btn" (click)="volver()">Volver</button>
+    <button class="btn-volver" (click)="volver()">Volver</button>
   </div>
 </div>
 
-<footer class="footer">
+<!-- Footer -->
+<footer>
   <a href="#">Términos</a>
   <a href="#">Privacidad</a>
   <a href="#">Contacto</a>
