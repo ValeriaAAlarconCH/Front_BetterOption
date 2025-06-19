@@ -66,6 +66,11 @@ export class NuevoeditarmicroempresaComponent implements OnInit {
     this.http.post('http://localhost:8080/microempresas/registrar', microempresaRequest).subscribe({
       next: () => {
         alert('Microempresa registrada exitosamente.');
+
+        // ✨ Limpiar el localStorage de eliminados
+        localStorage.removeItem('eliminados');
+
+        // Resetear campos
         this.microempresa = {
           nombreNegocio: '',
           rubro: '',
