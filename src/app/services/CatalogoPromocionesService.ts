@@ -1,30 +1,49 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Catalogopromociones } from '../models/catalogopromociones';
+import { Observable, Subject } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { CatalogoPromociones } from '../models/catalogopromociones';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CatalogoPromocionesService {
+  private url = environment.apiURL;
+  private httpClient: HttpClient = inject(HttpClient);
+  private listaCambio: Subject<CatalogoPromociones[]> = new Subject<CatalogoPromociones[]>();
 
-  private url: string = 'http://localhost:8080/catalogopromociones'; // Ajusta si es necesario
-
-  constructor(private http: HttpClient) {}
-
-  listar(): Observable<Catalogopromociones[]> {
-    return this.http.get<Catalogopromociones[]>(this.url);
+  list(): Observable<CatalogoPromociones[]> {
+    return this.httpClient.get<CatalogoPromociones[]>(`${this.url}/catalogospromociones/listar`);
   }
 
-  obtenerPorId(id: number): Observable<Catalogopromociones> {
-    return this.http.get<Catalogopromociones>(`${this.url}/${id}`);
+  listId(id: number): Observable<CatalogoPromociones> {
+    return this.httpClient.get<CatalogoPromociones>(`${this.url}/catalogospromociones/listarid/${id}`);
   }
 
-  insertar(promo: Catalogopromociones): Observable<any> {
-    return this.http.post(this.url, promo);
+  insertar(catalogo: CatalogoPromociones): Observable<any> {
+    return this.httpClient.post(`${this.url}/catalogospromociones/registrar`, catalogo);
   }
 
-  update(promo: Catalogopromociones): Observable<any> {
-    return this.http.put(`${this.url}/${promo.id}`, promo);
+  update(catalogo: CatalogoPromociones): Observable<any> {
+    return this.httpClient.put(`${this.url}/catalogospromociones/actualizar/${catalogo.id_catalogopromociones}`, catalogo);
+  }
+
+  delete(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.url}/catalogospromociones/eliminar/${id}`);
+  }
+
+  setList(listaNueva: CatalogoPromociones[]) {
+    this.listaCambio.next(listaNueva);
+  }
+
+  getListaCambio(): Observable<CatalogoPromociones[]> {
+    return this.listaCambio.asObservable();
+  }
+
+  actualizarLista(): void {
+    this.list().subscribe({
+      next: (data) => this.setList(data),
+      error: (err) => console.error('Error actualizando lista', err)
+    });
   }
 }
