@@ -1,34 +1,33 @@
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-
-import { Catalogopromociones } from '../../../models/catalogopromociones';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatSort, MatSortModule} from '@angular/material/sort';
+import {MatTable, MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { CatalogoPromociones } from '../../../models/catalogopromociones';
 import { CatalogoPromocionesService } from '../../../services/CatalogoPromocionesService';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-listarcatalogopromociones',
-  standalone: true,
   templateUrl: './listarcatalogopromociones.html',
-  styleUrl: './listarcatalogopromociones.css',
+  styleUrls: ['./listarcatalogopromociones.css'],
   imports: [
+    CommonModule,
     MatTableModule,
-    MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSortModule
   ]
 })
 export class Listarcatalogopromociones implements OnInit {
-  displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'precio'];
-  dataSource = new MatTableDataSource<Catalogopromociones>();
+  displayedColumns: string[] = ['id', 'nombreCatalogo', 'descripcion', 'fechaInicio', 'fechaFin'];
+  dataSource: MatTableDataSource<CatalogoPromociones> = new MatTableDataSource<CatalogoPromociones>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  catalogoService = inject(CatalogoPromocionesService);
+  constructor(private catalogoService: CatalogoPromocionesService) {}
 
   ngOnInit(): void {
-    this.catalogoService.listar().subscribe((data) => {
+    this.catalogoService.list().subscribe((data) => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

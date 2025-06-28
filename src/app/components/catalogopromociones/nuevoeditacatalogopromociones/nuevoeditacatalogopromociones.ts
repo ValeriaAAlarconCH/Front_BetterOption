@@ -1,92 +1,70 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { MatCard, MatCardTitle, MatCardContent } from '@angular/material/card';
-import { MatFormField } from '@angular/material/form-field';
-import { MatInput, MatInputModule, MatLabel } from '@angular/material/input';
-import { MatButton } from '@angular/material/button';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { Catalogopromociones } from '../../../models/catalogopromociones';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CatalogoPromocionesService } from '../../../services/CatalogoPromocionesService';
+import { CatalogoPromociones } from '../../../models/catalogopromociones';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-nuevoeditacatalogopromociones',
+  standalone: true,
+  templateUrl: './nuevoeditacatalogopromociones.html',
+  styleUrls: ['./nuevoeditacatalogopromociones.css'],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatCard,
-    MatCardTitle,
-    MatCardContent,
-    MatFormField,
-    MatLabel,
-    MatInput,
+    MatFormFieldModule,
     MatInputModule,
-    MatButton
-  ],
-  templateUrl: './nuevoeditacatalogopromociones.html',
-  styleUrl: './nuevoeditacatalogopromociones.css',
-  standalone: true
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonModule
+  ]
 })
-export class Nuevoeditacatalogopromociones {
-  form: FormGroup;
-  fb: FormBuilder = inject(FormBuilder);
-  router = inject(Router);
-  route = inject(ActivatedRoute);
-  catalogoService = inject(CatalogoPromocionesService);
+export class NuevoEditaCatalogoPromociones implements OnInit {
+  private catalogoService = inject(CatalogoPromocionesService);
+  private activatedRoute = inject(ActivatedRoute);
+  private router = inject(Router);
+  private fb = inject(FormBuilder);
 
-  id: number = 0;
-  edicion: boolean = false;
+  form!: FormGroup;
+  idCatalogo: number = 0;
 
-  constructor() {
+  ngOnInit(): void {
     this.form = this.fb.group({
-      nombre: ['', Validators.required],
+      id_catalogopromociones: [0],
+      nombreCatalogo: ['', Validators.required],
       descripcion: ['', Validators.required],
-      precio: [0, [Validators.required, Validators.min(1)]]
+      fechaInicio: ['', Validators.required],
+      fechaFin: ['', Validators.required],
+      microempresadto: this.fb.group({
+        id_microempresa: [1]
+      })
     });
-  }
 
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.id = params['id'];
-      this.edicion = this.id != null;
-      if (this.edicion) {
-        this.cargarFormulario();
+    this.activatedRoute.params.subscribe(params => {
+      this.idCatalogo = params['id'];
+      if (this.idCatalogo) {
+        this.catalogoService.listId(this.idCatalogo).subscribe(data => {
+          this.form.patchValue(data);
+        });
       }
     });
   }
 
-  cargarFormulario() {
-    this.catalogoService.obtenerPorId(this.id).subscribe((data: Catalogopromociones) => {
-      this.form.patchValue({
-        nombre: data.nombre,
-        descripcion: data.descripcion,
-        precio: data.precio
-      });
-    });
-  }
+  guardar(): void {
+    const catalogo: CatalogoPromociones = this.form.value;
 
-  onSubmit() {
-    if (this.form.invalid) {
-      console.log("Formulario inválido");
-      return;
-    }
-
-    const promocion: Catalogopromociones = {
-      id: this.id,
-      nombre: this.form.value.nombre,
-      descripcion: this.form.value.descripcion,
-      precio: this.form.value.precio
-    };
-
-    if (this.edicion) {
-      this.catalogoService.update(promocion).subscribe(() => {
-        console.log("Promoción actualizada");
+    if (this.idCatalogo > 0) {
+      this.catalogoService.update(catalogo).subscribe(() => {
         this.router.navigate(['/catalogopromociones']);
       });
     } else {
-      this.catalogoService.insertar(promocion).subscribe(() => {
-        console.log("Promoción registrada");
+      this.catalogoService.insertar(catalogo).subscribe(() => {
         this.router.navigate(['/catalogopromociones']);
       });
     }

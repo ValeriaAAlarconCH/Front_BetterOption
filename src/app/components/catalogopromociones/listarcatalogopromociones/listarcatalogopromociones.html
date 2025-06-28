@@ -4,28 +4,34 @@
     <!-- ID -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      <td mat-cell *matCellDef="let element">{{ element.id_catalogopromociones }}</td>
     </ng-container>
 
-    <!-- Nombre -->
-    <ng-container matColumnDef="nombre">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
-      <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+    <!-- Nombre del Catálogo -->
+    <ng-container matColumnDef="nombreCatalogo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre del Catálogo</th>
+      <td mat-cell *matCellDef="let element">{{ element.nombreCatalogo }}</td>
     </ng-container>
 
     <!-- Descripción -->
     <ng-container matColumnDef="descripcion">
-      <th mat-header-cell *matHeaderCellDef>Descripción</th>
-      <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Descripción</th>
+      <td mat-cell *matCellDef="let element">{{ element.descripcion }}</td>
     </ng-container>
 
-    <!-- Descuento -->
-    <ng-container matColumnDef="precio">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Descuento (%)</th>
-      <td mat-cell *matCellDef="let element"> {{element.precio}}%</td>
+    <!-- Fecha Inicio -->
+    <ng-container matColumnDef="fechaInicio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de Inicio</th>
+      <td mat-cell *matCellDef="let element">{{ element.fechaInicio }}</td>
     </ng-container>
 
-    <!-- Header y filas -->
+    <!-- Fecha Fin -->
+    <ng-container matColumnDef="fechaFin">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de Fin</th>
+      <td mat-cell *matCellDef="let element">{{ element.fechaFin }}</td>
+    </ng-container>
+
+    <!-- Filas -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>

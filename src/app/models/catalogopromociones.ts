@@ -1,6 +1,10 @@
-export class Catalogopromociones {
-  id: number;
-  nombre: string;
+export class CatalogoPromociones {
+  id_catalogopromociones: number;
+  nombreCatalogo: string;
   descripcion: string;
-  precio: number;
+  fechaInicio: Date;
+  fechaFin: Date;
+  microempresadto: {
+    id_microempresa: number;
+  };
 }
