@@ -1,0 +1,50 @@
+/* === Estilo contenedor de tabla === */
+.mat-elevation-z8 {
+  margin: 20px auto;
+  max-width: 95%;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  overflow-x: auto;
+}
+
+/* === Cabecera de tabla === */
+table mat-header-row {
+  background-color: #2980b9;
+  color: white;
+  font-weight: bold;
+}
+
+/* === Filas de tabla === */
+table mat-row {
+  transition: background-color 0.3s;
+}
+
+table mat-row:hover {
+  background-color: #f2f2f2;
+}
+
+/* === Celdas === */
+mat-cell, mat-header-cell {
+  padding: 16px;
+  font-size: 14px;
+  text-align: left;
+}
+
+/* === Columnas con mucho texto === */
+mat-cell[colspan], mat-header-cell[colspan] {
+  text-align: center;
+}
+
+/* === Imagen como enlace o preview (opcional) === */
+mat-cell img {
+  max-width: 50px;
+  border-radius: 8px;
+}
+
+/* === Paginador === */
+mat-paginator {
+  background-color: #f8f9f9;
+  border-top: 1px solid #ddd;
+  border-radius: 0 0 12px 12px;
+}
