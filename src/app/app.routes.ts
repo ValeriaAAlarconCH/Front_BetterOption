@@ -5,7 +5,7 @@ import {Nuevoeditaproducto} from './components/producto/nuevoeditaproducto/nuevo
 import {
   Listarcatalogopromociones
 } from './components/catalogopromociones/listarcatalogopromociones/listarcatalogopromociones';
-import {Listarnotificacion} from './components/notificacion/listarnotificacion/listarnotificacion';
+import {Nuevoeditanotificacion} from './components/notificacion/nuevoeditanotificacion/nuevoeditanotificacion';
 import {Listarusuario} from './components/usuario/listarusuario/listarusuario';
 import {Listarwishlist} from './components/wishlist/listarwishlist/listarwishlist';
 import {Listarcategoria} from './components/categoria/listarcategoria/listarcategoria';
@@ -25,7 +25,7 @@ export const routes: Routes = [
   {path : 'usuarios/registrar', component: Nuevoeditausuario},
   {path : 'wishlists', component: Listarwishlist},
   {path : 'wishlists/registrar', component: Nuevoeditawishlist},
-  {path : 'notificaciones', component: Listarnotificacion},
+  {path : 'notificaciones', component: Nuevoeditanotificacion},
   {path : 'categorias', component: Listarcategoria},
   {path : 'categorias/registrar', component: Nuevoeditacategoria},
   { path: 'microempresas/registrar', component: NuevoeditarmicroempresaComponent },
