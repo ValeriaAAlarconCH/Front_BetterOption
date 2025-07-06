@@ -2,14 +2,55 @@
 <h2>TU ALIADO PARA LAS COMPRAS INTELIGENTES</h2>
 
 <nav>
-  <a [routerLink]= "'/'" >Principal</a>
-  <a [routerLink]= "'/productos'" >Productos</a>
-  <a [routerLink]= "'/microempresas'" >Tiendas</a>
-  <a [routerLink]= "'/descuentos'" >Descuentos</a>
-  <a [routerLink]= "'/usuarios'" >Usuarios</a>
-  <a [routerLink]= "'/wishlists'" >Wishlists</a>
-  <a [routerLink]= "'/notificaciones'" >Notificaciones</a>
-  <a [routerLink]= "'/categorias'" >Categorias</a>
+  <a [routerLink]="'/'">Principal</a>
 
+  <button mat-button [matMenuTriggerFor]="menuProductos">Productos</button>
+  <mat-menu #menuProductos="matMenu">
+    <button mat-menu-item [routerLink]="'/productos'">Listar Productos</button>
+    <button mat-menu-item [routerLink]="'/productos/registrar'">Registrar Producto</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="menuTiendas">Tiendas</button>
+  <mat-menu #menuTiendas="matMenu">
+    <button mat-menu-item [routerLink]="'/microempresas'">Listar Tiendas</button>
+    <button mat-menu-item [routerLink]="'/microempresas/registrar'">Registrar Tienda</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="menuDescuentos">Descuentos</button>
+  <mat-menu #menuDescuentos="matMenu">
+    <button mat-menu-item [routerLink]="'/catalogospromociones'">Listar Descuentos</button>
+    <button mat-menu-item [routerLink]="'/catalogospromociones/registrar'">Registrar Descuento</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="menuCatalogos">Catalogos</button>
+  <mat-menu #menuCatalogos="matMenu">
+    <button mat-menu-item [routerLink]="'/productoscatalogos'">Listar Catalogos</button>
+    <button mat-menu-item [routerLink]="'/productoscatalogos/registrar'">Registrar Catalogo</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="menuUsuarios">Usuarios</button>
+  <mat-menu #menuUsuarios="matMenu">
+    <button mat-menu-item [routerLink]="'/usuarios'">Listar Usuarios</button>
+    <button mat-menu-item [routerLink]="'/usuarios/registrar'">Registrar Usuario</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="menuWishlists">Wishlists</button>
+  <mat-menu #menuWishlists="matMenu">
+    <button mat-menu-item [routerLink]="'/wishlists'">Listar Wishlists</button>
+    <button mat-menu-item [routerLink]="'/wishlists/registrar'">Registrar Wishlist</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="menuNotificaciones">Notificaciones</button>
+  <mat-menu #menuNotificaciones="matMenu">
+    <button mat-menu-item [routerLink]="'/notificaciones'">Listar Notificaciones</button>
+    <button mat-menu-item [routerLink]="'/notificaciones/registrar'">Registrar Notificacion</button>
+  </mat-menu>
+
+  <button mat-button [matMenuTriggerFor]="menuCategorias">Categorías</button>
+  <mat-menu #menuCategorias="matMenu">
+    <button mat-menu-item [routerLink]="'/categorias'">Listar Categorias</button>
+    <button mat-menu-item [routerLink]="'/categorias/registrar'">Registrar Categoria</button>
+  </mat-menu>
 </nav>
+
 <router-outlet />
