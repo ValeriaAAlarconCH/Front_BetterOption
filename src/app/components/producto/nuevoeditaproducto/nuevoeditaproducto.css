@@ -1,14 +1,12 @@
-/* Estilo general del card del formulario */
 .example-card {
-  max-width: 700px;
+  max-width: 720px;
   margin: 30px auto;
-  padding: 20px;
+  padding: 25px;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
 }
 
-/* Título centrado */
 mat-card-title {
   font-size: 1.8rem;
   color: #2c3e50;
@@ -16,28 +14,37 @@ mat-card-title {
   margin-bottom: 20px;
 }
 
-/* Contenido del formulario */
 .form-container {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* Campos del formulario */
 mat-form-field {
   width: 100%;
 }
 
-/* Estilo del input de imagen */
 .form-field {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
   font-weight: bold;
   color: #34495e;
 }
 
-/* Botón de registrar */
+.form-field input[type="file"] {
+  padding: 8px 0;
+}
+
+.preview-imagen {
+  max-width: 200px;
+  max-height: 200px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  object-fit: cover;
+}
+
 button[type="submit"] {
   align-self: flex-end;
   font-weight: bold;

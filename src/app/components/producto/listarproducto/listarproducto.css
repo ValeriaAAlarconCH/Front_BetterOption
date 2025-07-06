@@ -1,50 +1,37 @@
-/* === Estilo contenedor de tabla === */
-.mat-elevation-z8 {
-  margin: 20px auto;
-  max-width: 95%;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  overflow-x: auto;
+/* Contenedor general de tarjetas */
+.productos-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
 }
 
-/* === Cabecera de tabla === */
-table mat-header-row {
-  background-color: #2980b9;
-  color: white;
+/* Estilo para cada card de producto */
+.producto-card {
+  max-width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.producto-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Imagen del producto */
+mat-card-image {
+  max-height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Título y texto */
+mat-card-title {
   font-weight: bold;
+  color: #2c3e50;
 }
 
-/* === Filas de tabla === */
-table mat-row {
-  transition: background-color 0.3s;
-}
-
-table mat-row:hover {
-  background-color: #f2f2f2;
-}
-
-/* === Celdas === */
-mat-cell, mat-header-cell {
-  padding: 16px;
-  font-size: 14px;
-  text-align: left;
-}
-
-/* === Columnas con mucho texto === */
-mat-cell[colspan], mat-header-cell[colspan] {
-  text-align: center;
-}
-
-/* === Imagen como enlace o preview (opcional) === */
-mat-cell img {
-  max-width: 50px;
-  border-radius: 8px;
-}
-
-/* === Paginador === */
-mat-paginator {
-  background-color: #f8f9f9;
-  border-top: 1px solid #ddd;
-  border-radius: 0 0 12px 12px;
+mat-card-subtitle {
+  color: #7f8c8d;
 }

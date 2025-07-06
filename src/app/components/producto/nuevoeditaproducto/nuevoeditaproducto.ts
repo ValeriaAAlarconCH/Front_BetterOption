@@ -39,25 +39,27 @@ import {CommonModule} from '@angular/common';
   styleUrl: './nuevoeditaproducto.css'
 })
 export class Nuevoeditaproducto {
-  productoForm : FormGroup;
-  fb : FormBuilder = inject(FormBuilder)
+  productoForm: FormGroup;
+  fb: FormBuilder = inject(FormBuilder);
   productoService: ProductoService = inject(ProductoService);
   router = inject(Router);
-  edicion : boolean = false;
-  route : ActivatedRoute = inject(ActivatedRoute);
-  id: number = 0;
-  microempresas: any[] = [];
-  categorias: any[] = [];
+  route: ActivatedRoute = inject(ActivatedRoute);
   microempresaService: MicroempresaService = inject(MicroempresaService);
   categoriaService: CategoriaService = inject(CategoriaService);
+
+  microempresas: Microempresa[] = [];
+  categorias: Categoria[] = [];
+  id: number = 0;
+  edicion: boolean = false;
+  imagenPreview: string = '';
 
   constructor() {
     this.productoForm = this.fb.group({
       id_producto: [''],
-      nombreProducto : ['', Validators.required],
-      descripcion : ['', Validators.required],
+      nombreProducto: ['', Validators.required],
+      descripcion: ['', Validators.required],
       precio: ['', Validators.required],
-      stock : ['', [Validators.required]],
+      stock: ['', Validators.required],
       imagen: ['', Validators.required],
       microempresa: ['', Validators.required],
       categoria: ['', Validators.required]
@@ -67,72 +69,66 @@ export class Nuevoeditaproducto {
   ngOnInit() {
     this.route.params.subscribe(data => {
       this.id = data['id'];
-      this.edicion = data['id'] != null;
-      this.cargaForm();
+      this.edicion = this.id != null;
+      if (this.edicion) {
+        this.cargaForm();
+      }
     });
 
-      this.categoriaService.list().subscribe((data) => {
-        this.categorias = data;
-      });
-
-      this.microempresaService.list().subscribe((data) => {
-        this.microempresas = data;
-      });
-
+    this.categoriaService.list().subscribe(data => this.categorias = data);
+    this.microempresaService.list().subscribe(data => this.microempresas = data);
   }
 
-  cargaForm(){
-    if(this.edicion){
-      this.productoService.listId(this.id).subscribe((data:Producto) => {
-        console.log(data);
-        this.productoForm.patchValue({
-          nombreProducto:data.nombreProducto,
-          descripcion:data.descripcion,
-          precio:data.precio,
-          stock:data.stock,
-          imagen:data.imagen,
-          categoriadto: {
-            id_categoria: data.categoriadto.id_categoria
-          },
-          microempresadto: {
-            id_microempresa: data.microempresadto.id_microempresa
-          }
-        });
-      })
+  cargarImagen(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64 = reader.result as string;
+        this.productoForm.patchValue({ imagen: base64 });
+        this.imagenPreview = base64;
+      };
+      reader.readAsDataURL(file);
     }
+  }
+
+  cargaForm() {
+    this.productoService.listId(this.id).subscribe((data: Producto) => {
+      this.imagenPreview = data.imagen;
+      this.productoForm.patchValue({
+        nombreProducto: data.nombreProducto,
+        descripcion: data.descripcion,
+        precio: data.precio,
+        stock: data.stock,
+        imagen: data.imagen,
+        microempresa: data.microempresadto.id_microempresa,
+        categoria: data.categoriadto.id_categoria
+      });
+    });
   }
 
   onSubmit() {
     if (this.productoForm.valid) {
-      const producto: Producto = new Producto();
-      producto.id_producto = this.id;
-      producto.nombreProducto = this.productoForm.value.nombreProducto;
-      producto.descripcion = this.productoForm.value.descripcion;
-      producto.precio = this.productoForm.value.precio;
-      producto.stock = this.productoForm.value.stock;
-      producto.imagen = this.productoForm.value.imagen;
+      const producto: Producto = {
+        ...new Producto(),
+        ...this.productoForm.value,
+        microempresadto: { id_microempresa: this.productoForm.value.microempresa } as Microempresa,
+        categoriadto: { id_categoria: this.productoForm.value.categoria } as Categoria
+      };
 
-      producto.categoriadto = { id_categoria: this.productoForm.value.categoria } as Categoria;
-      producto.microempresadto = { id_microempresa: this.productoForm.value.microempresa } as Microempresa;
+      const callback = () => {
+        this.productoService.actualizarLista();
+        this.router.navigate(['productos']);
+      };
 
-      if (!this.edicion) {
-        console.log("Datos leídos del form:", producto);
-        this.productoService.insert(producto).subscribe((data) => {
-          console.log(data);
-          this.productoService.actualizarLista();
-          console.log("Lista actualizada");
-        });
+      if (this.edicion) {
+        producto.id_producto = this.id;
+        this.productoService.update(producto).subscribe(callback);
       } else {
-        this.productoService.update(producto).subscribe(() => {
-          this.productoService.actualizarLista();
-          console.log("Producto actualizado");
-        });
+        this.productoService.insert(producto).subscribe(callback);
       }
-
-      this.router.navigate(['productos']);
     } else {
       console.log("Formulario no válido");
     }
   }
-
 }
