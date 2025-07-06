@@ -80,6 +80,23 @@ export class ListarmicroempresaComponent implements OnInit {
     }
   }
 
+  actualizar() {
+    if (this.indiceSeleccionado === null || this.indiceSeleccionado === undefined) {
+      alert('Por favor, selecciona una microempresa antes de actualizar.');
+      return;
+    }
+
+    const microempresaSeleccionada = this.microempresas[this.indiceSeleccionado];
+
+
+    const idMicroempresa = microempresaSeleccionada.id_microempresa;
+
+
+    this.router.navigate(['/microempresas/actualizar', idMicroempresa]);
+  }
+
+
+
   volver() {
     this.router.navigate(['/']);
   }
