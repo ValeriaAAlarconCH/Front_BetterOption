@@ -5,7 +5,8 @@ import {Nuevoeditaproducto} from './components/producto/nuevoeditaproducto/nuevo
 import {
   Listarcatalogopromociones
 } from './components/catalogopromociones/listarcatalogopromociones/listarcatalogopromociones';
-//import {Listarnotificacion} from './components/notificacion/listarnotificacion/listarnotificacion';
+import {Nuevoeditanotificacion} from './components/notificacion/nuevoeditanotificacion/nuevoeditanotificacion';
+import {Listarnotificacion} from './components/notificacion/listarnotificacion/listarnotificacion';
 import {Listarusuario} from './components/usuario/listarusuario/listarusuario';
 import {Listarwishlist} from './components/wishlist/listarwishlist/listarwishlist';
 import {Listarcategoria} from './components/categoria/listarcategoria/listarcategoria';
