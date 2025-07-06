@@ -1,9 +1,54 @@
-.example-card{
-  margin: 0 auto;
-  width: 600px;
-}
-.form-container{
-  display: flex;
-  flex-direction: column;
+/* Estilo general del card del formulario */
+.example-card {
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background-color: #ffffff;
 }
 
+/* Título centrado */
+mat-card-title {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Contenido del formulario */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Campos del formulario */
+mat-form-field {
+  width: 100%;
+}
+
+/* Estilo del input de imagen */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-weight: bold;
+  color: #34495e;
+}
+
+/* Botón de registrar */
+button[type="submit"] {
+  align-self: flex-end;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: #2980b9;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #1f5f8b;
+}

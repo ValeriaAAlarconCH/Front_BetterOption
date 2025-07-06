@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 @Component({
-  selector: 'app-notificacion',
-  standalone: true,
+  selector: 'app-listarnotificacion',
   imports: [CommonModule, FormsModule, HttpClientModule],
-  templateUrl: './notificacion.html',
-  styleUrls: ['./notificacion.css']
+  templateUrl: './listarnotificacion.html',
+  styleUrl: './listarnotificacion.css'
 })
-export class NotificacionComponent implements OnInit {
+export class Listarnotificacion implements OnInit{
   mostrarFormulario = false;
 
   nueva = {
@@ -75,4 +74,5 @@ export class NotificacionComponent implements OnInit {
       });
     }
   }
+
 }

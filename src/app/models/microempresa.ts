@@ -10,3 +10,4 @@ export class Microempresa {
   descripción: string;
   usuario: Usuario = new Usuario();
 }
+

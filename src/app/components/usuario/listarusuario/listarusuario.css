@@ -1,0 +1,56 @@
+/* Contenedor con sombra y margen */
+.mat-elevation-z8 {
+  margin: 30px auto;
+  padding: 20px;
+  max-width: 1000px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo general de la tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Cabecera de columnas */
+th.mat-header-cell {
+  background-color: #2980b9;
+  color: white;
+  font-weight: bold;
+  padding: 14px;
+  font-size: 1rem;
+}
+
+/* Celdas de datos */
+td.mat-cell {
+  padding: 14px;
+  font-size: 0.95rem;
+  color: #2c3e50;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Filas al pasar el mouse */
+tr.mat-row:hover {
+  background-color: #f0f9ff;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Estilo del paginador */
+mat-paginator {
+  margin-top: 20px;
+  color: #2c3e50;
+}
+
+/* Mejoras de responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+  .mat-elevation-z8 {
+    padding: 10px;
+  }
+
+  th.mat-header-cell, td.mat-cell {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
