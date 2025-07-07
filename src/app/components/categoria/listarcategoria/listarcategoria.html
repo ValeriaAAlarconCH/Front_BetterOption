@@ -1,7 +1,18 @@
 <div class="container mt-4">
   <h2>Categorías</h2>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+  <!-- Barra de búsqueda -->
+  <div class="barra-busqueda-container">
+    <input
+      type="text"
+      [(ngModel)]="filtro"
+      (ngModelChange)="aplicarFiltro()"
+      class="barra-busqueda"
+      placeholder="Buscar por nombre o descripción"
+    />
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 tabla-categorias" matSort>
 
     <ng-container matColumnDef="id_categoria">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
