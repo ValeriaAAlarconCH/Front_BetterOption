@@ -25,6 +25,7 @@ import {
   NuevoEditaCatalogoPromociones
 } from './components/catalogopromociones/nuevoeditacatalogopromociones/nuevoeditacatalogopromociones';
 import {ListarcategoriaComponent} from './components/categoria/listarcategoria/listarcategoria';
+import {Agregarproducto} from './components/wishlist/nuevoeditawishlist/agregarproducto/agregarproducto';
 
 
 export const routes: Routes = [
@@ -32,6 +33,7 @@ export const routes: Routes = [
 
   {path : 'productos', component: Listarproducto},
   {path : 'productos/registrar', component: Nuevoeditaproducto},
+  { path: 'wishlist/:id/agregarproducto', component: Agregarproducto},
 
   {path : 'catalogospromociones', component: Listarcatalogopromociones},
   {path : 'catalogospromociones/registrar', component: NuevoEditaCatalogoPromociones},
