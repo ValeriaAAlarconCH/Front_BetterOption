@@ -1,56 +1,51 @@
-/* Contenedor con sombra y margen */
-.mat-elevation-z8 {
-  margin: 30px auto;
-  padding: 20px;
-  max-width: 1000px;
-  background-color: #ffffff;
+.usuario-container {
+  padding: 30px;
+  background-color: #f1f9ff;
+  min-height: 100vh;
+}
+
+.usuario-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.barra-busqueda {
+  display: block;
+  margin: 0 auto 30px auto;
+  padding: 10px;
+  width: 50%;
+  font-size: 16px;
+  border: 2px solid #a0d3ef;
+  border-radius: 6px;
+}
+
+.tarjetas-usuarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.tarjeta-usuario {
+  width: 300px;
+  padding: 15px;
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: #fff;
 }
 
-/* Estilo general de la tabla */
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-/* Cabecera de columnas */
-th.mat-header-cell {
-  background-color: #2980b9;
-  color: white;
+.tarjeta-usuario mat-card-title {
+  font-size: 20px;
   font-weight: bold;
-  padding: 14px;
-  font-size: 1rem;
+  margin-bottom: 10px;
 }
 
-/* Celdas de datos */
-td.mat-cell {
-  padding: 14px;
-  font-size: 0.95rem;
-  color: #2c3e50;
-  border-bottom: 1px solid #e0e0e0;
+.tarjeta-usuario mat-card-content p {
+  margin: 4px 0;
 }
 
-/* Filas al pasar el mouse */
-tr.mat-row:hover {
-  background-color: #f0f9ff;
-  transition: background-color 0.2s ease-in-out;
-}
-
-/* Estilo del paginador */
-mat-paginator {
-  margin-top: 20px;
-  color: #2c3e50;
-}
-
-/* Mejoras de responsividad para pantallas pequeñas */
-@media (max-width: 768px) {
-  .mat-elevation-z8 {
-    padding: 10px;
-  }
-
-  th.mat-header-cell, td.mat-cell {
-    font-size: 0.9rem;
-    padding: 10px;
-  }
+.acciones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
 }
