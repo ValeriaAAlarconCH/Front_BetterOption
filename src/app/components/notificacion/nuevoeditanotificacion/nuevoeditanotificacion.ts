@@ -51,6 +51,8 @@ export class Nuevoeditanotificacion implements OnInit {
   }
 
   ngOnInit(): void {
+    this.obtenerUsuarios();
+
     this.route.params.subscribe(params => {
       if (params['id'] && !isNaN(Number(params['id']))) {
         this.id = Number(params['id']);
@@ -60,8 +62,6 @@ export class Nuevoeditanotificacion implements OnInit {
         this.edicion = false;
       }
     });
-
-    this.obtenerUsuarios();
   }
 
   obtenerUsuarios(): void {
@@ -108,7 +108,7 @@ export class Nuevoeditanotificacion implements OnInit {
 
     peticion.subscribe({
       next: () => this.router.navigate(['/notificaciones']),
-      error: err => console.error(err)
+      error: err => console.error('Error al guardar', err)
     });
   }
 }
