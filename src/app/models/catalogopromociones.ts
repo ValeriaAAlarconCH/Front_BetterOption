@@ -4,7 +4,8 @@ export class CatalogoPromociones {
   descripcion: string;
   fechaInicio: Date;
   fechaFin: Date;
-  microempresadto: {
+  microempresa: {
     id_microempresa: number;
+    nombreNegocio: string;
   };
 }

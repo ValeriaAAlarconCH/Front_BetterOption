@@ -1,0 +1,44 @@
+.background {
+  background-color: #e3f7ff;
+  height: calc(100vh - 64px); /* Ajusta según altura de navbar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.card {
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 450px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.custom-btn {
+  width: 100%;
+  background-color: #d0f0ff;
+  color: black;
+  font-weight: bold;
+  border: 1px solid black;
+}
+.form-container {
+  max-width: 500px;
+  margin: 30px auto;
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
