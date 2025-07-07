@@ -1,14 +1,17 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CatalogoPromocionesService } from '../../../services/CatalogoPromocionesService';
-import { CatalogoPromociones } from '../../../models/catalogopromociones';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { CatalogoPromocionesService } from '../../../services/CatalogoPromocionesService';
+import { CatalogoPromociones } from '../../../models/catalogopromociones';
+import { MicroempresaService } from '../../../services/MicroempresaService';
+import { Microempresa } from '../../../models/microempresa';
 
 @Component({
   selector: 'app-nuevoeditacatalogopromociones',
@@ -22,17 +25,20 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ]
 })
 export class NuevoEditaCatalogoPromociones implements OnInit {
   private catalogoService = inject(CatalogoPromocionesService);
+  private microService = inject(MicroempresaService);
   private activatedRoute = inject(ActivatedRoute);
   private router = inject(Router);
   private fb = inject(FormBuilder);
 
   form!: FormGroup;
   idCatalogo: number = 0;
+  listaMicroempresas: Microempresa[] = [];
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -41,9 +47,12 @@ export class NuevoEditaCatalogoPromociones implements OnInit {
       descripcion: ['', Validators.required],
       fechaInicio: ['', Validators.required],
       fechaFin: ['', Validators.required],
-      microempresadto: this.fb.group({
-        id_microempresa: [1]
-      })
+      microempresadto: [null, Validators.required] //
+    });
+
+
+    this.microService.list().subscribe(data => {
+      this.listaMicroempresas = data;
     });
 
     this.activatedRoute.params.subscribe(params => {
@@ -61,12 +70,16 @@ export class NuevoEditaCatalogoPromociones implements OnInit {
 
     if (this.idCatalogo > 0) {
       this.catalogoService.update(catalogo).subscribe(() => {
-        this.router.navigate(['/catalogopromociones']);
+        alert('Catálogo actualizado correctamente');
+        this.router.navigate(['/catalogospromociones']); // <- redirección aquí
       });
     } else {
       this.catalogoService.insertar(catalogo).subscribe(() => {
-        this.router.navigate(['/catalogopromociones']);
+        alert('Catálogo registrado correctamente');
+        this.router.navigate(['/catalogospromociones']); // <- redirección aquí
       });
     }
   }
+
+
 }
