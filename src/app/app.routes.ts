@@ -28,7 +28,6 @@ import {ListarusuarioComponent} from './components/usuario/listarusuario/listaru
 import {UpdateusuarioComponent} from './components/usuario/updateusuario/updateusuario';
 import {Agregarproducto} from './components/wishlist/nuevoeditawishlist/agregarproducto/agregarproducto';
 
-
 export const routes: Routes = [
   { path: '', component: Principal },
 
@@ -49,8 +48,9 @@ export const routes: Routes = [
   {path : 'wishlists/registrar', component: Nuevoeditawishlist},
   {path: 'wishlist/actualizar/:id', component: Nuevoeditawishlist},
 
-  { path: 'notificaciones', component: Listarnotificacion },
-  { path: 'notificaciones/registrar', component: Nuevoeditanotificacion },
+  {path : 'notificaciones', component: Listarnotificacion},
+  {path : 'notificaciones/registrar', component: Nuevoeditanotificacion},
+  { path: 'notificaciones/actualizar/:id', component: Nuevoeditanotificacion },
 
   { path: 'categorias', component: ListarcategoriaComponent },
   {path : 'categorias/registrar', component: Nuevoeditacategoria},

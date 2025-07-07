@@ -5,26 +5,6 @@
   margin: 20px 0;
 }
 
-.center-btn {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.btn-toggle {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 20px;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.btn-toggle:hover {
-  background-color: #0056b3;
-}
-
 .container {
   display: flex;
   flex-direction: column;
@@ -74,25 +54,16 @@
 .btn-eliminar:hover {
   background-color: #b02a37;
 }
-
-.card-registrar input {
-  display: block;
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-.btn-registrar {
-  background-color: #28a745;
+.btn-actualizar {
+  margin-left: 10px; /* Aquí separas los botones */
+  background-color: #007bff;
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 6px 14px;
   border-radius: 6px;
   cursor: pointer;
 }
 
-.btn-registrar:hover {
-  background-color: #218838;
+.btn-actualizar:hover {
+  background-color: #0056b3;
 }

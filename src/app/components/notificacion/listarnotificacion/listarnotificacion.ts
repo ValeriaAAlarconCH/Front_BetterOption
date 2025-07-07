@@ -1,27 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-listarnotificacion',
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  standalone: true,
+  imports: [CommonModule, HttpClientModule, RouterModule],
   templateUrl: './listarnotificacion.html',
   styleUrl: './listarnotificacion.css'
 })
-export class Listarnotificacion implements OnInit{
-  mostrarFormulario = false;
-
-  nueva = {
-    mensaje: '',
-    tipo: '',
-    fechaEnvio: '',
-    usuarioId: ''
-  };
+export class Listarnotificacion implements OnInit {
 
   notificaciones: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.obtenerNotificaciones();
@@ -29,50 +22,27 @@ export class Listarnotificacion implements OnInit{
 
   obtenerNotificaciones(): void {
     this.http.get<any[]>('http://localhost:8080/notificaciones/listar').subscribe({
-      next: data => this.notificaciones = data,
-      error: err => console.error('Error al cargar notificaciones', err)
-    });
-  }
-
-  registrar(): void {
-    if (!this.nueva.mensaje || !this.nueva.tipo || !this.nueva.fechaEnvio || !this.nueva.usuarioId) {
-      alert('Completa todos los campos');
-      return;
-    }
-
-    const nuevaNoti = {
-      mensaje: this.nueva.mensaje,
-      tipo: this.nueva.tipo,
-      fechaEnvio: this.nueva.fechaEnvio,
-      usuario: { id_Usuario: this.nueva.usuarioId }
-    };
-
-    this.http.post('http://localhost:8080/notificaciones/registrar', nuevaNoti).subscribe({
-      next: () => {
-        alert('✅ Notificación registrada');
-        this.obtenerNotificaciones();
-        this.nueva = { mensaje: '', tipo: '', fechaEnvio: '', usuarioId: '' };
+      next: data => {
+        const eliminadas = JSON.parse(localStorage.getItem('notisEliminadas') || '[]');
+        this.notificaciones = data.map(noti => ({
+          ...noti,
+          oculto: eliminadas.includes(noti.id_notificacion)
+        }));
       },
-      error: err => {
-        alert('❌ Error al registrar notificación');
-        console.error(err);
-      }
+      error: err => console.error('Error al cargar notificaciones', err)
     });
   }
 
   eliminar(id: number): void {
     if (confirm('¿Estás seguro de eliminar esta notificación?')) {
-      this.http.delete(`http://localhost:8080/notificaciones/eliminar/${id}`).subscribe({
-        next: () => {
-          alert('🗑️ Notificación eliminada');
-          this.obtenerNotificaciones();
-        },
-        error: err => {
-          alert('❌ Error al eliminar notificación');
-          console.error(err);
-        }
-      });
+      let eliminadas = JSON.parse(localStorage.getItem('notisEliminadas') || '[]');
+      eliminadas.push(id);
+      localStorage.setItem('notisEliminadas', JSON.stringify(eliminadas));
+      this.obtenerNotificaciones();
     }
   }
 
+  irAEditar(id: number): void {
+    this.router.navigate(['/notificaciones/actualizar', id]);
+  }
 }
