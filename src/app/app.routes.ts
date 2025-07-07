@@ -15,18 +15,9 @@ import {Nuevoeditausuario} from './components/usuario/nuevoeditausuario/nuevoedi
 import {Nuevoeditawishlist} from './components/wishlist/nuevoeditawishlist/nuevoeditawishlist';
 import {NuevoeditarmicroempresaComponent} from './components/microempresa/nuevoeditamicroempresa/nuevoeditamicroempresa';
 import { ListarmicroempresaComponent } from './components/microempresa/listarmicroempresa/listarmicroempresa';
-import {
-  updatemicroempresacomponents
-} from './components/microempresa/updatemicroempresacomponents/updatemicroempresacomponents';
-import {Listarnotificacion} from './components/notificacion/listarnotificacion/listarnotificacion';
-import {Nuevoeditanotificacion} from './components/notificacion/nuevoeditanotificacion/nuevoeditanotificacion';
-import {
-  Nuevoeditacatalogopromociones
-} from './components/catalogopromociones/nuevoeditacatalogopromociones/nuevoeditacatalogopromociones';
+import {updatemicroempresacomponents} from './components/microempresa/updatemicroempresacomponents/updatemicroempresacomponents';
 import {Listarproductocatalogo} from './components/productocatalogo/listarproductocatalogo/listarproductocatalogo';
-import {
-  Nuevoeditaproductocatalogo
-} from './components/productocatalogo/nuevoeditaproductocatalogo/nuevoeditaproductocatalogo';
+import {Nuevoeditaproductocatalogo} from './components/productocatalogo/nuevoeditaproductocatalogo/nuevoeditaproductocatalogo';
 
 
 export const routes: Routes = [
@@ -36,7 +27,7 @@ export const routes: Routes = [
   {path : 'productos/registrar', component: Nuevoeditaproducto},
 
   {path : 'catalogospromociones', component: Listarcatalogopromociones},
-  {path : 'catalogospromociones/registrar', component: Nuevoeditacatalogopromociones},
+  //{path : 'catalogospromociones/registrar', component: Nuevoeditacatalogopromociones},
 
   {path : 'usuarios', component: Listarusuario},
   {path : 'usuarios/registrar', component: Nuevoeditausuario},
@@ -46,6 +37,8 @@ export const routes: Routes = [
 
   {path : 'notificaciones', component: Listarnotificacion},
   {path : 'notificaciones/registrar', component: Nuevoeditanotificacion},
+  { path: 'notificaciones/actualizar/:id', component: Nuevoeditanotificacion },
+
 
   {path : 'categorias', component: Listarcategoria},
   {path : 'categorias/registrar', component: Nuevoeditacategoria},
