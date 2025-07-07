@@ -14,6 +14,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {CommonModule} from '@angular/common';
 import {ConfirmDialogo} from './confirm-dialogo/confirm-dialogo';
 import {MatDialog} from '@angular/material/dialog';
+import {FormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
 
 
 @Component({
@@ -28,12 +30,17 @@ import {MatDialog} from '@angular/material/dialog';
     MatCardModule,
     MatButtonModule,
     CommonModule,
+    FormsModule,
+    MatInputModule
   ],
   templateUrl: './listarproducto.html',
   styleUrl: './listarproducto.css'
 })
 export class Listarproducto {
   lista: Producto[] = [];
+  listaFiltrada: Producto[] = [];
+  filtro: string = '';
+
   productoService = inject(ProductoService);
   route = inject(Router);
   dialog = inject(MatDialog);
@@ -43,6 +50,7 @@ export class Listarproducto {
       next: (data) => {
         const eliminados = JSON.parse(localStorage.getItem('productosEliminados') || '[]');
         this.lista = data.filter(p => !eliminados.includes(p.id_producto));
+        this.listaFiltrada = [...this.lista];
       }
     });
     this.productoService.actualizarLista();
@@ -73,7 +81,17 @@ export class Listarproducto {
       eliminados.push(id);
       localStorage.setItem('productosEliminados', JSON.stringify(eliminados));
       this.lista.splice(index, 1);
+      this.aplicarFiltro();
     }
   }
 
+  aplicarFiltro(): void {
+    const filtroLower = this.filtro.toLowerCase();
+    this.listaFiltrada = this.lista.filter(producto =>
+      producto.nombreProducto.toLowerCase().includes(filtroLower) ||
+      producto.descripcion.toLowerCase().includes(filtroLower) ||
+      producto.categoriadto?.nombreCategoria.toLowerCase().includes(filtroLower) ||
+      producto.microempresadto?.nombreNegocio.toLowerCase().includes(filtroLower)
+    );
+  }
 }

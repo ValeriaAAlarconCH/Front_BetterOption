@@ -1,61 +1,56 @@
-.example-card {
-  max-width: 720px;
-  margin: 30px auto;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-}
-
-mat-card-title {
-  font-size: 1.8rem;
-  color: #2c3e50;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.form-container {
+/* Fondo general del formulario */
+:host {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  background-color: #e3f5fc;
+  min-height: 80vh;
 }
 
+/* Estilo general del formulario */
+mat-card {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Título del formulario */
+mat-card-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+/* Campos del formulario */
 mat-form-field {
   width: 100%;
+  margin-bottom: 16px;
 }
 
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-weight: bold;
-  color: #34495e;
-}
-
-.form-field input[type="file"] {
-  padding: 8px 0;
-}
-
+/* Vista previa de la imagen */
 .preview-imagen {
-  max-width: 200px;
-  max-height: 200px;
+  width: 220px;
   margin-top: 10px;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  object-fit: cover;
+  display: block;
 }
 
-button[type="submit"] {
-  align-self: flex-end;
+/* Botones del formulario */
+button {
   font-weight: bold;
-  font-size: 1rem;
   padding: 10px 20px;
-  border-radius: 8px;
-  background-color: #2980b9;
-  color: white;
-  transition: background-color 0.3s ease;
+  margin-top: 10px;
 }
 
-button[type="submit"]:hover {
-  background-color: #1f5f8b;
+/* Botones agrupados */
+.botones-formulario {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
 }
