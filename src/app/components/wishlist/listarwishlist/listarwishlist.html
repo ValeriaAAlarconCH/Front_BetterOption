@@ -1,36 +1,30 @@
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort>
-
-    <!-- Position Column -->
-    <ng-container matColumnDef="id_wishlist">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.id_wishlist}} </td>
-    </ng-container>
-
-    <!-- Fecha Column -->
-    <ng-container matColumnDef="fechaAgregado">
-      <th mat-header-cell *matHeaderCellDef> Fecha Agregado </th>
-      <td mat-cell *matCellDef="let element"> {{element.fechaAgregado|date:'dd/MM/yyyy'}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="usuario">
-      <th mat-header-cell *matHeaderCellDef> Usuario </th>
-      <td mat-cell *matCellDef="let element"> {{element.usuario.nombre}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="producto">
-      <th mat-header-cell *matHeaderCellDef> Producto </th>
-      <td mat-cell *matCellDef="let element"> {{element.producto.nombreProducto}} </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                 showFirstLastButtons
-                 aria-label="Select page of periodic elements">
-  </mat-paginator>
+<div class="busqueda-container">
+  <input
+    type="text"
+    class="barra-busqueda"
+    [(ngModel)]="filtro"
+    (ngModelChange)="aplicarFiltro()"
+    placeholder="Buscar por usuario, producto, categoría o microempresa"
+  />
 </div>
+
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let wishlist of listaFiltrada">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Wishlist #{{wishlist.id_wishlist}} - {{wishlist.usuariodto.nombre}} ({{wishlist.fechaAgregado | date:'shortDate'}})
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div *ngFor="let p of wishlist.productosdto" class="producto-item">
+      <p><strong>Producto:</strong> {{p.nombreProducto}} - S/. {{p.precio}}</p>
+      <img [src]="p.imagen" alt="{{p.nombreProducto}}" />
+      <button mat-button color="warn" (click)="eliminarProducto(wishlist.id_wishlist, p.id_producto)">Eliminar producto</button>
+    </div>
+
+    <div class="acciones-wishlist">
+      <button mat-button color="accent" [routerLink]="['/wishlist', wishlist.id_wishlist, 'agregarproducto']">Agregar producto</button>
+      <button mat-button color="warn" (click)="eliminarWishlist(wishlist.id_wishlist)">Eliminar wishlist</button>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

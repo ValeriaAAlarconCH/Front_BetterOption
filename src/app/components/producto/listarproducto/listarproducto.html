@@ -1,17 +1,27 @@
-<div class="productos-container">
-  <mat-card class="producto-card" *ngFor="let producto of lista">
-    <mat-card-header>
-      <mat-card-title>{{ producto.nombreProducto }}</mat-card-title>
-      <mat-card-subtitle>{{ producto.categoriadto.nombreCategoria }}</mat-card-subtitle>
-    </mat-card-header>
-
-    <img mat-card-image *ngIf="producto.imagen" [src]="producto.imagen" alt="Imagen del producto" />
-
-    <mat-card-content>
-      <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
-      <p><strong>Precio:</strong> S/ {{ producto.precio }}</p>
-      <p><strong>Stock:</strong> {{ producto.stock }}</p>
-      <p><strong>Microempresa:</strong> {{ producto.microempresadto.nombreNegocio }}</p>
-    </mat-card-content>
-  </mat-card>
+<div class="busqueda-container">
+  <mat-form-field appearance="fill" class="barra-busqueda">
+    <mat-label>Buscar producto</mat-label>
+    <input matInput placeholder="Nombre, descripción, categoría o microempresa" [(ngModel)]="filtro" (ngModelChange)="aplicarFiltro()" />
+  </mat-form-field>
 </div>
+
+<mat-card class="producto-card" *ngFor="let producto of listaFiltrada">
+  <mat-card-header>
+    <mat-card-title>{{ producto.nombreProducto }}</mat-card-title>
+    <mat-card-subtitle>{{ producto.categoriadto.nombreCategoria }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <img mat-card-image *ngIf="producto.imagen" [src]="producto.imagen" alt="Imagen del producto" />
+
+  <mat-card-content>
+    <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+    <p><strong>Precio:</strong> S/ {{ producto.precio }}</p>
+    <p><strong>Stock:</strong> {{ producto.stock }}</p>
+    <p><strong>Microempresa:</strong> {{ producto.microempresadto.nombreNegocio }}</p>
+  </mat-card-content>
+
+  <div class="botones-producto">
+    <button mat-button color="primary" (click)="actualizar(producto.id_producto)">Actualizar</button>
+    <button mat-button color="warn" (click)="confirmarEliminacion(producto.id_producto)">Eliminar</button>
+  </div>
+</mat-card>

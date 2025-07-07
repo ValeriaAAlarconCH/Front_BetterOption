@@ -1,34 +1,31 @@
-<mat-card class="example-card">
-  <mat-card-title>Formulario de Wishlists</mat-card-title>
+<mat-card>
+  <mat-card-title>{{ id ? 'Editar Wishlist' : 'Crear Wishlist' }}</mat-card-title>
   <mat-card-content>
-    <form [formGroup]="wishlistForm" class="form-container" (ngSubmit)="onSubmit()">
+    <form [formGroup]="wishlistForm" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="fill">
-        <mat-label>Fecha Agregado</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fechaAgregado" placeholder="Fecha"/>
-        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-label>Fecha</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaAgregado">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" class="w-100">
+      <mat-form-field appearance="fill">
         <mat-label>Usuario</mat-label>
         <mat-select formControlName="usuario">
-          <mat-option *ngFor="let u of usuarios" [value]="u.id_usuario">
-            {{ u.nombre }}
-          </mat-option>
+          <mat-option *ngFor="let u of listausuarios" [value]="u.id_usuario">{{u.nombre}}</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Producto</mat-label>
-        <mat-select formControlName="producto">
-          <mat-option *ngFor="let p of productos" [value]="p.id_producto">
-            {{ p.nombreProducto }}
-          </mat-option>
+      <mat-form-field appearance="fill">
+        <mat-label>Productos</mat-label>
+        <mat-select formControlName="productos" multiple>
+          <mat-option *ngFor="let p of listaproductos" [value]="p.id_producto">{{p.nombreProducto}}</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <button type="submit" mat-raised-button color="primary">Registrar</button>
+      <button mat-raised-button color="primary" type="submit">
+        {{ id ? 'Actualizar' : 'Registrar' }}
+      </button>
     </form>
   </mat-card-content>
 </mat-card>

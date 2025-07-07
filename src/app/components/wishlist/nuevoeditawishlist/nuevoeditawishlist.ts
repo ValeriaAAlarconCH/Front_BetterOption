@@ -1,13 +1,13 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatButton} from "@angular/material/button";
-import {MatCard, MatCardContent, MatCardTitle} from "@angular/material/card";
-import {MatInput, MatInputModule, MatLabel} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
+import {MatInputModule} from "@angular/material/input";
 import {CommonModule} from "@angular/common";
-import {MatFormField} from '@angular/material/form-field';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule, MatOption} from '@angular/material/core';
-import {MatSelect} from '@angular/material/select';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 import {ProductoService} from '../../../services/ProductoService';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Producto} from '../../../models/producto';
@@ -20,104 +20,73 @@ import {Usuario} from '../../../models/usuario';
   selector: 'app-nuevoeditawishlist',
     imports: [
       CommonModule,
-      MatCard,
-      MatCardTitle,
-      MatCardContent,
       ReactiveFormsModule,
-      MatFormField,
-      MatLabel,
-      MatInput,
-      MatFormField,
-      MatButton,
+      MatFormFieldModule,
       MatInputModule,
+      MatButtonModule,
+      MatSelectModule,
+      MatCardModule,
       MatDatepickerModule,
       MatNativeDateModule,
-      MatSelect,
-      MatOption
     ],
   templateUrl: './nuevoeditawishlist.html',
   styleUrl: './nuevoeditawishlist.css'
 })
 export class Nuevoeditawishlist {
-  wishlistForm : FormGroup;
-  fb : FormBuilder = inject(FormBuilder)
-  wishlistService: WishlistService = inject(WishlistService);
+  wishlistForm: FormGroup;
+  listausuarios: Usuario[] = [];
+  listaproductos: Producto[] = [];
+  id: number | null = null;
+
+  fb = inject(FormBuilder);
+  wishlistService = inject(WishlistService);
+  usuarioService = inject(UsuarioService);
+  productoService = inject(ProductoService);
   router = inject(Router);
-  edicion : boolean = false;
-  route : ActivatedRoute = inject(ActivatedRoute);
-  id: number = 0;
-  usuarios: any[] = [];
-  productos: any[] = [];
-  usuarioService: UsuarioService = inject(UsuarioService);
-  productoService: ProductoService = inject(ProductoService);
+  route = inject(ActivatedRoute);
 
   constructor() {
     this.wishlistForm = this.fb.group({
-      id_wishlist: [''],
-      fechaAgregado : ['', Validators.required],
-      usuario: ['', Validators.required],
-      producto: ['', Validators.required]
+      fechaAgregado: [new Date(), Validators.required],
+      usuario: [null, Validators.required],
+      productos: [[], Validators.required]
     });
   }
 
   ngOnInit() {
-    this.route.params.subscribe(data => {
-      this.id = data['id'];
-      this.edicion = data['id'] != null;
-      this.cargaForm();
-    });
+    this.usuarioService.list().subscribe(data => this.listausuarios = data);
+    this.productoService.list().subscribe(data => this.listaproductos = data);
 
-    this.productoService.list().subscribe((data) => {
-      this.productos = data;
-    });
-
-    this.usuarioService.list().subscribe((data) => {
-      this.usuarios = data;
-    });
-
-  }
-
-  cargaForm(){
-    if(this.edicion){
-      this.wishlistService.listId(this.id).subscribe((data:Wishlist) => {
-        console.log(data);
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    if (this.id) {
+      this.wishlistService.listId(this.id).subscribe(w => {
         this.wishlistForm.patchValue({
-          fechaAgregado : data.fechaAgregado,
-          usuario: data.usuariodto?.id_usuario,
-          producto: data.productodto?.id_producto
+          fechaAgregado: new Date(w.fechaAgregado),
+          usuario: w.usuariodto.id_usuario,
+          productos: w.productosdto.map((p: Producto) => p.id_producto)
         });
-      })
+      });
     }
   }
 
   onSubmit() {
-    if (this.wishlistForm.valid) {
-      const wishlist: Wishlist = new Wishlist();
-      wishlist.id_wishlist= this.id;
-      wishlist.fechaAgregado = this.wishlistForm.value.fechaAgregado;
+    const wishlist = new Wishlist();
+    wishlist.fechaAgregado = this.wishlistForm.value.fechaAgregado;
 
-      wishlist.usuariodto = { id_usuario: this.wishlistForm.value.usuario } as Usuario;
+    const usuario = new Usuario();
+    usuario.id_usuario = this.wishlistForm.value.usuario;
+    wishlist.usuariodto = usuario;
 
-      wishlist.productodto = { id_producto: this.wishlistForm.value.producto } as Producto;
+    wishlist.productosdto = this.listaproductos.filter((p: Producto) =>
+      this.wishlistForm.value.productos.includes(p.id_producto)
+    );
 
-      if (!this.edicion) {
-        console.log("Datos leídos del form:", wishlist);
-        this.wishlistService.insert(wishlist).subscribe((data) => {
-          console.log(data);
-          this.wishlistService.actualizarLista();
-          console.log("Lista actualizada");
-        });
-      } else {
-        this.wishlistService.update(wishlist).subscribe(() => {
-          this.wishlistService.actualizarLista();
-          console.log("Wishlist actualizado");
-        });
-      }
-
-      this.router.navigate(['wishlists']);
-    } else {
-      console.log("Formulario no válido");
-    }
+    const accion = this.id ? this.wishlistService.update(wishlist) : this.wishlistService.insert(wishlist);
+    accion.subscribe(() => {
+      this.wishlistService.actualizarLista();
+      this.router.navigate(['/wishlists']);
+    }, err => {
+      console.error('Error guardando wishlist', err);
+    });
   }
-
 }

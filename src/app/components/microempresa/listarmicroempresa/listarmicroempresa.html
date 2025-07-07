@@ -2,8 +2,17 @@
   <!-- Panel de listado -->
   <div class="listado">
     <h2>Microempresas</h2>
+
+    <!-- 🔍 Barra de búsqueda -->
+    <input
+      type="text"
+      [(ngModel)]="filtroMicroempresa"
+      placeholder="Buscar microempresa por nombre"
+      class="input-busqueda"
+    />
+
     <ul class="lista">
-      <li *ngFor="let item of microempresas; let i = index"
+      <li *ngFor="let item of microempresasFiltradas(); let i = index"
           [class.seleccionado]="i === indiceSeleccionado"
           (click)="seleccionar(i)">
         {{ item.nombreNegocio }}
@@ -13,7 +22,6 @@
     <!-- Botones de acción -->
     <div class="botones">
       <button class="btn-vermas" (click)="verMas()">Ver más</button>
-      <button class="btn-seleccionar" (click)="confirmarSeleccion()">Seleccionar</button>
       <button class="btn-eliminar" (click)="eliminar()">Eliminar</button>
       <button class="btn-actualizar" (click)="actualizar()">Actualizar</button>
     </div>

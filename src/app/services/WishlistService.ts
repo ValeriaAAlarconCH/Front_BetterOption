@@ -25,22 +25,30 @@ export class WishlistService {
     return this.httpClient.post(this.url+"/wishlists/registrar", wishlist)
   }
 
-  update(wishlist:Wishlist): Observable<any>{
-    return this.httpClient.put(this.url + "/wishlists/actualizar", wishlist);
+  agregarProducto(idWishlist: number, productoId: number): Observable<any> {
+    return this.httpClient.post(`${this.url}/wishlists/${idWishlist}/agregarproducto/${productoId}`, {});
   }
-  delete(id: number): Observable<any>{
-    return this.httpClient.delete(this.url + "/wishlists/eliminar/" + id);
+
+  delete(id: number) {
+    return this.httpClient.delete(`${this.url}/wishlists/eliminar/${id}`);
   }
-  setList(listaNueva:Wishlist[]) {
-    this.listaCambio.next(listaNueva); //envia la nueva lista a los suscriptores
+
+  setList(listaNueva: Wishlist[]) {
+    this.listaCambio.next(listaNueva);
   }
-  getListaCambio(): Observable<Wishlist[]>{
+
+  getListaCambio(): Observable<Wishlist[]> {
     return this.listaCambio.asObservable();
   }
+
+  update(wishlist: Wishlist) {
+    return this.httpClient.put<Wishlist>(`${this.url}/wishlists/actualizar`, wishlist);
+  }
+
   actualizarLista(): void {
     this.list().subscribe({
-      next: (data) => this.setList(data), //envia la nueva lista a los suscriptores
-      error: (err) => console.error('Error actualizando lista', err)
+      next: data => this.setList(data),
+      error: err => console.error('Error actualizando lista', err)
     });
   }
 

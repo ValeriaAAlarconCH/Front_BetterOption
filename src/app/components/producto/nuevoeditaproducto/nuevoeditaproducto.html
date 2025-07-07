@@ -46,7 +46,12 @@
         </mat-select>
       </mat-form-field>
 
-      <button type="submit" mat-raised-button color="primary">Registrar</button>
+      <div class="botones-formulario">
+        <button type="submit" mat-raised-button color="primary">
+          {{ edicion ? 'Actualizar' : 'Registrar' }}
+        </button>
+        <button type="button" mat-button color="warn" (click)="cancelar()">Cancelar</button>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>
