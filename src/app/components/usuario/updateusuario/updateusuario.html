@@ -1,0 +1,41 @@
+<div class="imagen"><div class="container-registro">
+    <div class="formulario">
+      <h2>Actualizar Usuario</h2>
+
+      <input type="text" placeholder="Nombre" [(ngModel)]="usuario.nombre" />
+      <input type="email" placeholder="Correo" [(ngModel)]="usuario.correo" />
+      <input type="password" placeholder="Password" [(ngModel)]="usuario.password" />
+      <input type="text" placeholder="Rol" [(ngModel)]="usuario.rol" />
+
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha Registro</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="usuario.fecharegistro" placeholder="DD/MM/YYYY">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <button class="btn-registrar" (click)="actualizar()">Actualizar</button>
+    </div>
+
+    <div class="imagen">
+      <img src="assets/img/usuario.png" alt="Imagen usuario">
+      <button class="btn-microempresa" (click)="irAListaUsuarios()">Usuarios</button>
+    </div>
+  </div>
+
+    <footer class="footer">
+      <a href="#">Términos</a>
+      <a href="#">Privacidad</a>
+      <a href="#">Contacto</a>
+    </footer>
+
+    <img src="assets/img/usuario.png" alt="Imagen usuario" />
+    <button class="btn-microempresa" (click)="irAListaUsuarios()">Usuarios</button>
+  </div>
+
+<footer class="footer">
+  <a href="#">Términos</a>
+  <a href="#">Privacidad</a>
+  <a href="#">Contacto</a>
+</footer>

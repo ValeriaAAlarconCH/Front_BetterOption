@@ -1,10 +1,11 @@
 <mat-card class="example-card">
   <mat-card-title>Formulario de Usuarios</mat-card-title>
   <mat-card-content>
-    <form [formGroup]="usuarioForm" class="form-container"  (ngSubmit)="onSubmit()">
+    <form [formGroup]="usuarioForm" class="form-container" (ngSubmit)="onSubmit()">
+
       <mat-form-field appearance="fill">
         <mat-label>Nombre</mat-label>
-        <input  matInput  formControlName="nombre" placeholder="Ingrese el nuevo usuario" />
+        <input matInput formControlName="nombre" placeholder="Ingrese el nombre" />
       </mat-form-field>
 
       <mat-form-field appearance="fill">
@@ -23,10 +24,10 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>FechaRegistro</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fechaRegistro" placeholder=“Fecha“/>
+        <mat-label>Fecha de Registro</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaRegistro" placeholder="Seleccione la fecha" />
         <mat-hint>DD/MM/YYYY</mat-hint>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
