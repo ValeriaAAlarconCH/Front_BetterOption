@@ -8,6 +8,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
+import {CommonModule} from '@angular/common';
+import {MatCardModule} from '@angular/material/card';
+import {FormsModule} from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon';
+import {Usuario} from '../../../models/usuario';
 
 @Component({
   selector: 'app-listarusuario',
@@ -18,17 +23,19 @@ import { MatButtonModule } from '@angular/material/button';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatButtonModule
+    MatButtonModule,
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    FormsModule
   ]
 })
 
-export class ListarusuarioComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['id_usuario', 'nombre', 'correo', 'password', 'rol', 'fecharegistro', 'acciones'];
-  dataSource = new MatTableDataSource<any>();
-  usuarios: any[] = [];
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+export class ListarusuarioComponent implements OnInit {
+  usuarios: Usuario[] = [];
+  filtro: string = '';
+  usuariosFiltrados: Usuario[] = [];
 
   constructor(
     private usuarioService: UsuarioService,
@@ -36,18 +43,20 @@ export class ListarusuarioComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('✔️ Component ngOnInit llamando al API Get');
     this.usuarioService.getListaCambio().subscribe(data => {
       const eliminados = JSON.parse(localStorage.getItem('eliminadosUsuarios') || '[]');
-      this.usuarios = data.filter((u: any) => !eliminados.includes(u.id_usuario));
-      this.dataSource.data = this.usuarios;
+      this.usuarios = data.filter((u: Usuario) => !eliminados.includes(u.id_usuario));
+      this.aplicarFiltro();
     });
     this.usuarioService.actualizarLista();
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  aplicarFiltro(): void {
+    const termino = this.filtro.toLowerCase();
+    this.usuariosFiltrados = this.usuarios.filter(usuario =>
+      usuario.nombre.toLowerCase().includes(termino) ||
+      usuario.correo.toLowerCase().includes(termino)
+    );
   }
 
   actualizar(id: number): void {
@@ -62,9 +71,8 @@ export class ListarusuarioComponent implements OnInit, AfterViewInit {
         const eliminados = JSON.parse(localStorage.getItem('eliminadosUsuarios') || '[]');
         eliminados.push(id);
         localStorage.setItem('eliminadosUsuarios', JSON.stringify(eliminados));
-
         this.usuarios.splice(index, 1);
-        this.dataSource.data = [...this.usuarios];
+        this.aplicarFiltro();
         alert('Usuario eliminado visualmente.');
       }
     }
