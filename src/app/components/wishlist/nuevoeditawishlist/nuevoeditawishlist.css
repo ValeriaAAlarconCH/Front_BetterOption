@@ -1,69 +1,56 @@
-/* Tarjeta principal */
-.example-card {
+/* Fondo general del formulario */
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  background-color: #e3f5fc;
+  min-height: 80vh;
+}
+
+/* Estilo general del formulario */
+mat-card {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
   max-width: 600px;
-  margin: 40px auto;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
 }
 
 /* Título del formulario */
 mat-card-title {
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 24px;
   font-weight: bold;
-  color: #2980b9;
-  margin-bottom: 20px;
-}
-
-/* Contenido del formulario */
-mat-card-content {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  margin-bottom: 16px;
 }
 
 /* Campos del formulario */
 mat-form-field {
   width: 100%;
+  margin-bottom: 16px;
 }
 
-/* Selects más definidos */
-mat-select {
-  background-color: #f4f4f4;
-  border-radius: 4px;
-}
-
-/* Botón de registrar */
-button[type="submit"] {
-  align-self: center;
-  padding: 12px 30px;
-  font-weight: bold;
-  background-color: #2980b9;
-  color: #fff;
+/* Vista previa de la imagen */
+.preview-imagen {
+  width: 220px;
+  margin-top: 10px;
   border-radius: 8px;
-  transition: background-color 0.3s ease;
+  display: block;
 }
 
-/* Efecto hover en el botón */
-button[type="submit"]:hover {
-  background-color: #1f5e85;
-  color: #f1c40f;
+/* Botones del formulario */
+button {
+  font-weight: bold;
+  padding: 10px 20px;
+  margin-top: 10px;
 }
 
-/* Adaptabilidad móvil */
-@media (max-width: 768px) {
-  .example-card {
-    margin: 20px;
-    padding: 20px;
-  }
-
-  mat-card-title {
-    font-size: 1.3rem;
-  }
-
-  button[type="submit"] {
-    width: 100%;
-  }
+/* Botones agrupados */
+.botones-formulario {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
 }
