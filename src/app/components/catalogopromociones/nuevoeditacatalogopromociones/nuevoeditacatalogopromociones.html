@@ -1,29 +1,46 @@
-<form [formGroup]="form" (ngSubmit)="guardar()">
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Nombre del Catálogo</mat-label>
-    <input matInput formControlName="nombreCatalogo" required>
-  </mat-form-field>
+<div class="form-container">
+  <h2>Registrar Descuento</h2>
+  <form [formGroup]="form" (ngSubmit)="guardar()">
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Descripción</mat-label>
-    <textarea matInput formControlName="descripcion" required></textarea>
-  </mat-form-field>
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Fecha de Inicio</mat-label>
-    <input matInput [matDatepicker]="picker1" formControlName="fechaInicio">
-    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-    <mat-datepicker #picker1></mat-datepicker>
-  </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre del Descuento</mat-label>
+      <input matInput formControlName="nombreCatalogo" required>
+    </mat-form-field>
 
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Fecha de Fin</mat-label>
-    <input matInput [matDatepicker]="picker2" formControlName="fechaFin">
-    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-    <mat-datepicker #picker2></mat-datepicker>
-  </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit">
-    {{ idCatalogo > 0 ? 'Actualizar' : 'Registrar' }}
-  </button>
-</form>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="descripcion" required></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Microempresa</mat-label>
+      <mat-select formControlName="microempresadto">
+        <mat-option *ngFor="let micro of listaMicroempresas" [value]="micro">
+          {{ micro.nombreNegocio }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Fecha de Inicio</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="fechaInicio">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Fecha de Fin</mat-label>
+      <input matInput [matDatepicker]="picker2" formControlName="fechaFin">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">
+      {{ idCatalogo > 0 ? 'Actualizar' : 'Registrar' }}
+    </button>
+  </form>
+</div>
