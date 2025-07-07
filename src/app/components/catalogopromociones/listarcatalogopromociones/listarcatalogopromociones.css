@@ -1,0 +1,55 @@
+.container-listado {
+  background-color: #e3f7ff;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.card-promocion {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.card-promocion h3 {
+  margin-top: 0;
+  color: #1a3b5d;
+  font-weight: bold;
+}
+
+.card-promocion p {
+  margin: 5px 0;
+  font-size: 15px;
+}
+
+.boton-eliminar {
+  margin-top: 10px;
+  font-weight: bold;
+}
+.card-promocion {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
+  max-width: 600px;
+  width: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-promocion:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.acciones {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: center;
+}
+
