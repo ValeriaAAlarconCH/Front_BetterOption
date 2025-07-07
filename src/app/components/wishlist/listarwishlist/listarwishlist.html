@@ -1,18 +1,30 @@
+<div class="busqueda-container">
+  <input
+    type="text"
+    class="barra-busqueda"
+    [(ngModel)]="filtro"
+    (ngModelChange)="aplicarFiltro()"
+    placeholder="Buscar por usuario, producto, categoría o microempresa"
+  />
+</div>
+
 <mat-accordion>
-  <mat-expansion-panel *ngFor="let wishlist of lista">
+  <mat-expansion-panel *ngFor="let wishlist of listaFiltrada">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Wishlist #{{wishlist.id_wishlist}} - {{wishlist.usuariodto.nombre}} ({{wishlist.fechaAgregado | date:'shortDate'}})
       </mat-panel-title>
     </mat-expansion-panel-header>
 
-    <div *ngFor="let p of wishlist.productosdto" style="margin-bottom: 10px;">
+    <div *ngFor="let p of wishlist.productosdto" class="producto-item">
       <p><strong>Producto:</strong> {{p.nombreProducto}} - S/. {{p.precio}}</p>
-      <img [src]="p.imagen" alt="{{p.nombreProducto}}" width="100" style="border-radius: 8px;">
+      <img [src]="p.imagen" alt="{{p.nombreProducto}}" />
       <button mat-button color="warn" (click)="eliminarProducto(wishlist.id_wishlist, p.id_producto)">Eliminar producto</button>
     </div>
 
-    <button mat-button color="accent" [routerLink]="['/wishlist', wishlist.id_wishlist, 'agregarproducto']">Agregar producto</button>
-    <button mat-button color="warn" (click)="eliminarWishlist(wishlist.id_wishlist)">Eliminar wishlist</button>
+    <div class="acciones-wishlist">
+      <button mat-button color="accent" [routerLink]="['/wishlist', wishlist.id_wishlist, 'agregarproducto']">Agregar producto</button>
+      <button mat-button color="warn" (click)="eliminarWishlist(wishlist.id_wishlist)">Eliminar wishlist</button>
+    </div>
   </mat-expansion-panel>
 </mat-accordion>

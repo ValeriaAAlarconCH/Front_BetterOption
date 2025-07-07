@@ -13,6 +13,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ConfirmDialogo} from '../../producto/listarproducto/confirm-dialogo/confirm-dialogo';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-listarwishlist',
@@ -25,19 +26,39 @@ import {MatButtonModule} from '@angular/material/button';
     RouterLink,
     MatAccordion,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule,
   ],
   templateUrl: './listarwishlist.html',
   styleUrl: './listarwishlist.css'
 })
 export class Listarwishlist {
   lista: Wishlist[] = [];
+  listaFiltrada: Wishlist[] = [];
+  filtro: string = '';
+
   wishlistService = inject(WishlistService);
   dialog = inject(MatDialog);
 
   ngOnInit() {
-    this.wishlistService.getListaCambio().subscribe(data => this.lista = data);
+    this.wishlistService.getListaCambio().subscribe(data => {
+      this.lista = data;
+      this.aplicarFiltro();
+    });
     this.wishlistService.actualizarLista();
+  }
+
+  aplicarFiltro() {
+    const filtroLower = this.filtro.toLowerCase();
+    this.listaFiltrada = this.lista.filter(w =>
+      w.usuariodto?.nombre?.toLowerCase().includes(filtroLower) ||
+      w.productosdto?.some(p =>
+        p.nombreProducto?.toLowerCase().includes(filtroLower) ||
+        p.descripcion?.toLowerCase().includes(filtroLower) ||
+        p.categoriadto?.nombreCategoria?.toLowerCase().includes(filtroLower) ||
+        p.microempresadto?.nombreNegocio?.toLowerCase().includes(filtroLower)
+      )
+    );
   }
 
   eliminarWishlist(id: number) {

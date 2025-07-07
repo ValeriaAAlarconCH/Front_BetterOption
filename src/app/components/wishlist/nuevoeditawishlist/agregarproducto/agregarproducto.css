@@ -1,0 +1,56 @@
+/* Fondo general del formulario */
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  background-color: #e3f5fc;
+  min-height: 80vh;
+}
+
+/* Estilo general del formulario */
+mat-card {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 600px;
+}
+
+/* Título del formulario */
+mat-card-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+/* Campos del formulario */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+/* Vista previa de la imagen */
+.preview-imagen {
+  width: 220px;
+  margin-top: 10px;
+  border-radius: 8px;
+  display: block;
+}
+
+/* Botones del formulario */
+button {
+  font-weight: bold;
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+
+/* Botones agrupados */
+.botones-formulario {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
