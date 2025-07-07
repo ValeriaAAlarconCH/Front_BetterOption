@@ -35,6 +35,9 @@ export const routes: Routes = [
 
   {path : 'catalogospromociones', component: Listarcatalogopromociones},
   {path : 'catalogospromociones/registrar', component: NuevoEditaCatalogoPromociones},
+  { path: 'catalogospromociones/registrar/:id', component: NuevoEditaCatalogoPromociones },
+
+
 
   {path : 'usuarios', component: Listarusuario},
   {path : 'usuarios/registrar', component: Nuevoeditausuario},
@@ -55,4 +58,6 @@ export const routes: Routes = [
 
   {path : 'productoscatalogos', component: Listarproductocatalogo},
   {path : 'productoscatalogos/registrar', component: Nuevoeditaproductocatalogo},
+
+
 ]
