@@ -1,1 +1,39 @@
-<p>listarproductocatalogo works!</p>
+<div class="container-expansion">
+  <h2>Catálogos</h2>
+
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let catalogo of catalogos">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ catalogo.nombreCatalogo }}</mat-panel-title>
+        <mat-panel-description>
+          {{ catalogo.productos?.length || 0 }} producto(s)
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div *ngIf="catalogo.productos?.length > 0; else sinProductos">
+        <ul class="lista-productos">
+          <li *ngFor="let producto of catalogo.productos">
+            <span>
+              <strong>{{ producto.productodto.nombreProducto }}</strong> -
+              {{ producto.descuentoPorcentaje }}%
+            </span>
+            <div class="acciones-producto">
+              <button mat-raised-button color="warn" (click)="eliminarProductoCatalogo(producto.id_productocatalogo)">Eliminar</button>
+              <button mat-raised-button color="primary" (click)="editarProducto(producto.id_productocatalogo)">Actualizar</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <ng-template #sinProductos>
+        <p style="margin: 10px 0;">No hay productos en este catálogo.</p>
+      </ng-template>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="volver-container">
+    <img class="catalogo-img" src="assets/img/catalogo.png" alt="Imagen catálogo" />
+    <br />
+    <button class="btn-volver" (click)="volver()">Volver</button>
+  </div>
+</div>
