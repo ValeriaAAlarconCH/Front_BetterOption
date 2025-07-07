@@ -5,8 +5,6 @@ import {Nuevoeditaproducto} from './components/producto/nuevoeditaproducto/nuevo
 import {
   Listarcatalogopromociones
 } from './components/catalogopromociones/listarcatalogopromociones/listarcatalogopromociones';
-import {Nuevoeditanotificacion} from './components/notificacion/nuevoeditanotificacion/nuevoeditanotificacion';
-import {Listarnotificacion} from './components/notificacion/listarnotificacion/listarnotificacion';
 import {Listarusuario} from './components/usuario/listarusuario/listarusuario';
 import {Listarwishlist} from './components/wishlist/listarwishlist/listarwishlist';
 import {Listarcategoria} from './components/categoria/listarcategoria/listarcategoria';
@@ -20,13 +18,13 @@ import {
 } from './components/microempresa/updatemicroempresacomponents/updatemicroempresacomponents';
 import {Listarnotificacion} from './components/notificacion/listarnotificacion/listarnotificacion';
 import {Nuevoeditanotificacion} from './components/notificacion/nuevoeditanotificacion/nuevoeditanotificacion';
-import {
-  Nuevoeditacatalogopromociones
-} from './components/catalogopromociones/nuevoeditacatalogopromociones/nuevoeditacatalogopromociones';
 import {Listarproductocatalogo} from './components/productocatalogo/listarproductocatalogo/listarproductocatalogo';
 import {
   Nuevoeditaproductocatalogo
 } from './components/productocatalogo/nuevoeditaproductocatalogo/nuevoeditaproductocatalogo';
+import {
+  NuevoEditaCatalogoPromociones
+} from './components/catalogopromociones/nuevoeditacatalogopromociones/nuevoeditacatalogopromociones';
 
 
 export const routes: Routes = [
@@ -36,7 +34,7 @@ export const routes: Routes = [
   {path : 'productos/registrar', component: Nuevoeditaproducto},
 
   {path : 'catalogospromociones', component: Listarcatalogopromociones},
-  {path : 'catalogospromociones/registrar', component: Nuevoeditacatalogopromociones},
+  {path : 'catalogospromociones/registrar', component: NuevoEditaCatalogoPromociones},
 
   {path : 'usuarios', component: Listarusuario},
   {path : 'usuarios/registrar', component: Nuevoeditausuario},
@@ -51,7 +49,7 @@ export const routes: Routes = [
   {path : 'categorias/registrar', component: Nuevoeditacategoria},
 
   { path: 'microempresas/registrar', component: NuevoeditarmicroempresaComponent },
-  { path: 'microempresas', redirectTo: 'microempresas/registrar', pathMatch: 'full' },
+  { path: 'microempresas', component: ListarmicroempresaComponent },
   { path: 'microempresas/listar', component: ListarmicroempresaComponent },
   { path: 'microempresas/actualizar/:id', component: updatemicroempresacomponents},
 
