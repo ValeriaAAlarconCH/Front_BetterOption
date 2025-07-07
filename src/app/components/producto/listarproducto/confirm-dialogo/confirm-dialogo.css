@@ -1,0 +1,17 @@
+mat-dialog-content {
+  font-size: 16px;
+  padding: 20px 0;
+  font-family: inherit;
+}
+
+mat-dialog-actions {
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+button {
+  font-weight: bold;
+  padding: 6px 16px;
+}

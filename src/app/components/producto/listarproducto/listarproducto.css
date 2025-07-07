@@ -1,37 +1,52 @@
-/* Contenedor general de tarjetas */
-.productos-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  background-color: #f9f9f9;
+/* Contenedor de la barra de búsqueda */
+.busqueda-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 }
 
-/* Estilo para cada card de producto */
+.barra-busqueda {
+  width: 70%;
+  max-width: 500px;
+}
+
+/* Estilo para las cards de producto */
 .producto-card {
-  max-width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  margin: 15px auto;
+  max-width: 350px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  background-color: #ffffff;
+  padding: 10px;
 }
 
-.producto-card:hover {
-  transform: translateY(-5px);
-}
-
-/* Imagen del producto */
-mat-card-image {
-  max-height: 200px;
+/* Ajuste de imagen */
+img[mat-card-image] {
+  max-height: 180px;
   object-fit: cover;
-  border-bottom: 1px solid #ddd;
+  border-radius: 8px;
 }
 
-/* Título y texto */
+/* Texto dentro de las cards */
+mat-card-content p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+/* Título y subtítulo */
 mat-card-title {
+  font-size: 18px;
   font-weight: bold;
-  color: #2c3e50;
 }
 
 mat-card-subtitle {
-  color: #7f8c8d;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Botones dentro de cada card */
+.botones-producto {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }

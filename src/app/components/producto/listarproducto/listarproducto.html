@@ -1,4 +1,11 @@
-<mat-card class="producto-card" *ngFor="let producto of lista">
+<div class="busqueda-container">
+  <mat-form-field appearance="fill" class="barra-busqueda">
+    <mat-label>Buscar producto</mat-label>
+    <input matInput placeholder="Nombre, descripción, categoría o microempresa" [(ngModel)]="filtro" (ngModelChange)="aplicarFiltro()" />
+  </mat-form-field>
+</div>
+
+<mat-card class="producto-card" *ngFor="let producto of listaFiltrada">
   <mat-card-header>
     <mat-card-title>{{ producto.nombreProducto }}</mat-card-title>
     <mat-card-subtitle>{{ producto.categoriadto.nombreCategoria }}</mat-card-subtitle>
