@@ -5,6 +5,8 @@ import {Nuevoeditaproducto} from './components/producto/nuevoeditaproducto/nuevo
 import {
   Listarcatalogopromociones
 } from './components/catalogopromociones/listarcatalogopromociones/listarcatalogopromociones';
+import {Nuevoeditanotificacion} from './components/notificacion/nuevoeditanotificacion/nuevoeditanotificacion';
+import {Listarnotificacion} from './components/notificacion/listarnotificacion/listarnotificacion';
 import {Listarusuario} from './components/usuario/listarusuario/listarusuario';
 import {Listarwishlist} from './components/wishlist/listarwishlist/listarwishlist';
 import {Listarcategoria} from './components/categoria/listarcategoria/listarcategoria';
@@ -13,6 +15,9 @@ import {Nuevoeditausuario} from './components/usuario/nuevoeditausuario/nuevoedi
 import {Nuevoeditawishlist} from './components/wishlist/nuevoeditawishlist/nuevoeditawishlist';
 import {NuevoeditarmicroempresaComponent} from './components/microempresa/nuevoeditamicroempresa/nuevoeditamicroempresa';
 import { ListarmicroempresaComponent } from './components/microempresa/listarmicroempresa/listarmicroempresa';
+import {
+  updatemicroempresacomponents
+} from './components/microempresa/updatemicroempresacomponents/updatemicroempresacomponents';
 import {Listarnotificacion} from './components/notificacion/listarnotificacion/listarnotificacion';
 import {Nuevoeditanotificacion} from './components/notificacion/nuevoeditanotificacion/nuevoeditanotificacion';
 import {
@@ -22,6 +27,7 @@ import {Listarproductocatalogo} from './components/productocatalogo/listarproduc
 import {
   Nuevoeditaproductocatalogo
 } from './components/productocatalogo/nuevoeditaproductocatalogo/nuevoeditaproductocatalogo';
+
 
 export const routes: Routes = [
   {path : '', component: Principal},
@@ -45,7 +51,9 @@ export const routes: Routes = [
   {path : 'categorias/registrar', component: Nuevoeditacategoria},
 
   { path: 'microempresas/registrar', component: NuevoeditarmicroempresaComponent },
-  { path: 'microempresas', component: ListarmicroempresaComponent },
+  { path: 'microempresas', redirectTo: 'microempresas/registrar', pathMatch: 'full' },
+  { path: 'microempresas/listar', component: ListarmicroempresaComponent },
+  { path: 'microempresas/actualizar/:id', component: updatemicroempresacomponents},
 
   {path : 'productoscatalogos', component: Listarproductocatalogo},
   {path : 'productoscatalogos/registrar', component: Nuevoeditaproductocatalogo},

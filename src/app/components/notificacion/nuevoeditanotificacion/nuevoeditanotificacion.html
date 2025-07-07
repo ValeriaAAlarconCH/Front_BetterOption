@@ -1,1 +1,35 @@
-<p>nuevoeditanotificacion works!</p>
+<h2 class="titulo-principal">📢 Notificaciones</h2>
+
+<div class="center-btn">
+  <button (click)="mostrarFormulario = !mostrarFormulario" class="btn-toggle">
+    {{ mostrarFormulario ? '➖ Ocultar formulario' : '➕ Agregar notificación' }}
+  </button>
+</div>
+
+<div class="container">
+  <!-- Formulario para agregar -->
+  <div #formulario class="card card-registrar" *ngIf="mostrarFormulario">
+    <h3>📝 Registrar nueva notificación</h3>
+    <input [(ngModel)]="nueva.mensaje" placeholder="Mensaje">
+    <input [(ngModel)]="nueva.tipo" placeholder="Tipo">
+    <input [(ngModel)]="nueva.fechaEnvio" type="date">
+    <input [(ngModel)]="nueva.usuarioId" type="number" placeholder="ID Usuario">
+    <button (click)="registrar()" class="btn-registrar">Registrar</button>
+  </div>
+  <!-- Lista de notificaciones visibles -->
+  <ng-container *ngFor="let noti of notificaciones">
+    <div *ngIf="!noti.oculto" class="card card-noti">
+      <h3>📌 {{ noti.mensaje }}</h3>
+      <p><span class="etiqueta">📂 Tipo:</span> {{ noti.tipo }}</p>
+      <p><span class="etiqueta">📅 Fecha:</span> {{ noti.fechaEnvio }}</p>
+      <p>
+        <span class="etiqueta">🧑 Usuario:</span>
+        {{ noti.usuariodto?.nombre || 'Desconocido' }}
+        (ID: {{ noti.usuariodto?.id_usuario || 'Sin ID' }})
+      </p>
+      <button (click)="eliminar(noti.id_notificacion)" class="btn-eliminar">🗑️ Eliminar</button>
+      <button (click)="prepararEdicion(noti)" class="btn-actualizar">✏️ Actualizar</button>
+
+    </div>
+  </ng-container>
+</div>

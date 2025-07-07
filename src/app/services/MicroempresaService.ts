@@ -25,7 +25,7 @@ export class MicroempresaService {
     return this.httpClient.post(this.url+"/microempresas/registrar", microempresa)
   }
 
-  update(microempresa: Microempresa): Observable<any>{
+  update(microempresa: any): Observable<any>{
     return this.httpClient.put(this.url + "/microempresas/actualizar", microempresa);
   }
   delete(id: number): Observable<any>{
