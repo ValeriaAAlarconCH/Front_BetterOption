@@ -1,13 +1,13 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatButton} from "@angular/material/button";
-import {MatCard, MatCardContent, MatCardTitle} from "@angular/material/card";
-import {MatInput, MatInputModule, MatLabel} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from "@angular/material/card";
+import {MatInputModule} from "@angular/material/input";
 import {CommonModule} from "@angular/common";
-import {MatFormField, MatFormFieldModule} from '@angular/material/form-field';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
-import {MatSelect, MatOption, MatSelectModule} from '@angular/material/select';
+import {MatSelectModule} from '@angular/material/select';
 import {ProductoService} from '../../../services/ProductoService';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Producto} from '../../../models/producto';
@@ -20,21 +20,14 @@ import {Usuario} from '../../../models/usuario';
   selector: 'app-nuevoeditawishlist',
     imports: [
       CommonModule,
-      MatCard,
-      MatCardTitle,
-      MatCardContent,
       ReactiveFormsModule,
-      MatFormField,
-      MatLabel,
-      MatInput,
-      MatFormField,
-      MatButton,
+      MatFormFieldModule,
       MatInputModule,
+      MatButtonModule,
+      MatSelectModule,
+      MatCardModule,
       MatDatepickerModule,
       MatNativeDateModule,
-      MatSelect,
-      MatOption,
-      MatFormFieldModule, MatInputModule, MatSelectModule,
     ],
   templateUrl: './nuevoeditawishlist.html',
   styleUrl: './nuevoeditawishlist.css'
@@ -43,51 +36,57 @@ export class Nuevoeditawishlist {
   wishlistForm: FormGroup;
   listausuarios: Usuario[] = [];
   listaproductos: Producto[] = [];
+  id: number | null = null;
 
   fb = inject(FormBuilder);
   wishlistService = inject(WishlistService);
   usuarioService = inject(UsuarioService);
   productoService = inject(ProductoService);
   router = inject(Router);
+  route = inject(ActivatedRoute);
 
   constructor() {
     this.wishlistForm = this.fb.group({
       fechaAgregado: [new Date(), Validators.required],
       usuario: [null, Validators.required],
-      producto: [null, Validators.required]
+      productos: [[], Validators.required]
     });
   }
 
   ngOnInit() {
     this.usuarioService.list().subscribe(data => this.listausuarios = data);
     this.productoService.list().subscribe(data => this.listaproductos = data);
+
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    if (this.id) {
+      this.wishlistService.listId(this.id).subscribe(w => {
+        this.wishlistForm.patchValue({
+          fechaAgregado: new Date(w.fechaAgregado),
+          usuario: w.usuariodto.id_usuario,
+          productos: w.productosdto.map((p: Producto) => p.id_producto)
+        });
+      });
+    }
   }
 
   onSubmit() {
     const wishlist = new Wishlist();
-
-    // No seteamos id_wishlist aquí, lo genera el backend
     wishlist.fechaAgregado = this.wishlistForm.value.fechaAgregado;
 
-    // Usuario DTO con solo el ID
     const usuario = new Usuario();
     usuario.id_usuario = this.wishlistForm.value.usuario;
     wishlist.usuariodto = usuario;
 
-    // Producto seleccionado desde la lista
-    const productoSeleccionado = this.listaproductos.find(p => p.id_producto === this.wishlistForm.value.producto);
-    if (!productoSeleccionado) {
-      console.error("Producto no encontrado en la lista");
-      return;
-    }
+    wishlist.productosdto = this.listaproductos.filter((p: Producto) =>
+      this.wishlistForm.value.productos.includes(p.id_producto)
+    );
 
-    wishlist.productosdto = [productoSeleccionado];
-
-    this.wishlistService.insert(wishlist).subscribe(() => {
+    const accion = this.id ? this.wishlistService.update(wishlist) : this.wishlistService.insert(wishlist);
+    accion.subscribe(() => {
       this.wishlistService.actualizarLista();
       this.router.navigate(['/wishlists']);
     }, err => {
-      console.error('Error registrando wishlist', err);
+      console.error('Error guardando wishlist', err);
     });
   }
 }

@@ -10,8 +10,10 @@ import {Listarwishlist} from './components/wishlist/listarwishlist/listarwishlis
 import {Nuevoeditacategoria} from './components/categoria/nuevoeditacategoria/nuevoeditacategoria';
 import {Nuevoeditausuario} from './components/usuario/nuevoeditausuario/nuevoeditausuario';
 import {Nuevoeditawishlist} from './components/wishlist/nuevoeditawishlist/nuevoeditawishlist';
-import {NuevoeditarmicroempresaComponent} from './components/microempresa/nuevoeditamicroempresa/nuevoeditamicroempresa';
-import { ListarmicroempresaComponent } from './components/microempresa/listarmicroempresa/listarmicroempresa';
+import {
+  NuevoeditarmicroempresaComponent
+} from './components/microempresa/nuevoeditamicroempresa/nuevoeditamicroempresa';
+import {ListarmicroempresaComponent} from './components/microempresa/listarmicroempresa/listarmicroempresa';
 import {
   updatemicroempresacomponents
 } from './components/microempresa/updatemicroempresacomponents/updatemicroempresacomponents';
@@ -41,8 +43,9 @@ export const routes: Routes = [
   { path: 'usuarios', component: Listarusuario },
   { path: 'usuarios/registrar', component: Nuevoeditausuario },
 
-  { path: 'wishlists', component: Listarwishlist },
-  { path: 'wishlists/registrar', component: Nuevoeditawishlist },
+  {path : 'wishlists', component: Listarwishlist},
+  {path : 'wishlists/registrar', component: Nuevoeditawishlist},
+  {path: 'wishlist/actualizar/:id', component: Nuevoeditawishlist},
 
   { path: 'notificaciones', component: Listarnotificacion },
   { path: 'notificaciones/registrar', component: Nuevoeditanotificacion },

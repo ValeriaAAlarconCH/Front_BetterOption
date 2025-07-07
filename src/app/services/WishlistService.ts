@@ -29,8 +29,8 @@ export class WishlistService {
     return this.httpClient.post(`${this.url}/wishlists/${idWishlist}/agregarproducto/${productoId}`, {});
   }
 
-  delete(id: number): Observable<any> {
-    return this.httpClient.delete(`${this.url}/eliminar/${id}`);
+  delete(id: number) {
+    return this.httpClient.delete(`${this.url}/wishlists/eliminar/${id}`);
   }
 
   setList(listaNueva: Wishlist[]) {
@@ -39,6 +39,10 @@ export class WishlistService {
 
   getListaCambio(): Observable<Wishlist[]> {
     return this.listaCambio.asObservable();
+  }
+
+  update(wishlist: Wishlist) {
+    return this.httpClient.put<Wishlist>(`${this.url}/wishlists/actualizar`, wishlist);
   }
 
   actualizarLista(): void {
