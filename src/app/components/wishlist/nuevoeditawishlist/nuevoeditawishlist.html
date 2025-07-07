@@ -1,29 +1,31 @@
 <mat-card>
-  <mat-card-title>Crear Wishlist</mat-card-title>
+  <mat-card-title>{{ id ? 'Editar Wishlist' : 'Crear Wishlist' }}</mat-card-title>
   <mat-card-content>
     <form [formGroup]="wishlistForm" (ngSubmit)="onSubmit()">
-      <mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label>Fecha</mat-label>
         <input matInput [matDatepicker]="picker" formControlName="fechaAgregado">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label>Usuario</mat-label>
         <mat-select formControlName="usuario">
           <mat-option *ngFor="let u of listausuarios" [value]="u.id_usuario">{{u.nombre}}</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Producto</mat-label>
-        <mat-select formControlName="producto">
+      <mat-form-field appearance="fill">
+        <mat-label>Productos</mat-label>
+        <mat-select formControlName="productos" multiple>
           <mat-option *ngFor="let p of listaproductos" [value]="p.id_producto">{{p.nombreProducto}}</mat-option>
         </mat-select>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit">Registrar</button>
+      <button mat-raised-button color="primary" type="submit">
+        {{ id ? 'Actualizar' : 'Registrar' }}
+      </button>
     </form>
   </mat-card-content>
 </mat-card>
