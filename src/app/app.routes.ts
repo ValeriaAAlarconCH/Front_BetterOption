@@ -5,7 +5,6 @@ import {Nuevoeditaproducto} from './components/producto/nuevoeditaproducto/nuevo
 import {
   Listarcatalogopromociones
 } from './components/catalogopromociones/listarcatalogopromociones/listarcatalogopromociones';
-import {Listarusuario} from './components/usuario/listarusuario/listarusuario';
 import {Listarwishlist} from './components/wishlist/listarwishlist/listarwishlist';
 import {Nuevoeditacategoria} from './components/categoria/nuevoeditacategoria/nuevoeditacategoria';
 import {Nuevoeditausuario} from './components/usuario/nuevoeditausuario/nuevoeditausuario';
@@ -25,6 +24,8 @@ import {
   NuevoEditaCatalogoPromociones
 } from './components/catalogopromociones/nuevoeditacatalogopromociones/nuevoeditacatalogopromociones';
 import {ListarcategoriaComponent} from './components/categoria/listarcategoria/listarcategoria';
+import {ListarusuarioComponent} from './components/usuario/listarusuario/listarusuario';
+import {UpdateusuarioComponent} from './components/usuario/updateusuario/updateusuario';
 import {Agregarproducto} from './components/wishlist/nuevoeditawishlist/agregarproducto/agregarproducto';
 
 
@@ -40,8 +41,9 @@ export const routes: Routes = [
   {path : 'catalogospromociones/registrar', component: NuevoEditaCatalogoPromociones},
   { path: 'catalogospromociones/registrar/:id', component: NuevoEditaCatalogoPromociones },
 
-  { path: 'usuarios', component: Listarusuario },
+  { path: 'usuarios', component: ListarusuarioComponent },
   { path: 'usuarios/registrar', component: Nuevoeditausuario },
+  { path: 'usuarios/actualizar/:id', component: UpdateusuarioComponent },
 
   {path : 'wishlists', component: Listarwishlist},
   {path : 'wishlists/registrar', component: Nuevoeditawishlist},
