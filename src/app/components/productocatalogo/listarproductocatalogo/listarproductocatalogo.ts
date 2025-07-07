@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule, NgIf, NgFor } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-listarproductocatalogo',
@@ -11,7 +12,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     CommonModule,
     NgIf,
     NgFor,
-    MatExpansionModule
+    MatExpansionModule,
+    FormsModule
   ],
   templateUrl: './listarproductocatalogo.html',
   styleUrls: ['./listarproductocatalogo.css']
@@ -20,6 +22,7 @@ export class ListarproductocatalogoComponent implements OnInit {
   catalogos: any[] = [];
   productosCatalogo: any[] = [];
   panelOpenState = signal(false);
+  filtroCatalogo: string = ''; // ✅ nuevo: filtro de búsqueda
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -74,10 +77,20 @@ export class ListarproductocatalogoComponent implements OnInit {
 
   volver(): void {
     this.router.navigate(['/']);
-
   }
+
   editarProducto(id: number): void {
     this.router.navigate(['/productoscatalogos/editar', id]);
   }
 
+  // ✅ nuevo: función que devuelve los catálogos filtrados
+  catalogosFiltrados(): any[] {
+    if (!this.filtroCatalogo.trim()) {
+      return this.catalogos;
+    }
+
+    return this.catalogos.filter(c =>
+      c.nombreCatalogo?.toLowerCase().includes(this.filtroCatalogo.trim().toLowerCase())
+    );
+  }
 }

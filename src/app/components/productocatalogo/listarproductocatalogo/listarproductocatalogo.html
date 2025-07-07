@@ -1,8 +1,17 @@
 <div class="container-expansion">
   <h2>Catálogos</h2>
 
+  <!-- 🔍 Barra de búsqueda -->
+  <input
+    type="text"
+    [(ngModel)]="filtroCatalogo"
+    placeholder="Buscar catálogo por nombre"
+    class="input-busqueda"
+  />
+
+  <!-- 📦 Lista de catálogos filtrados -->
   <mat-accordion>
-    <mat-expansion-panel *ngFor="let catalogo of catalogos">
+    <mat-expansion-panel *ngFor="let catalogo of catalogosFiltrados()">
       <mat-expansion-panel-header>
         <mat-panel-title>{{ catalogo.nombreCatalogo }}</mat-panel-title>
         <mat-panel-description>
