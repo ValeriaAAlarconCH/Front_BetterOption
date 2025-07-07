@@ -1,0 +1,130 @@
+/* Fondo general */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #5dcbe8;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor principal */
+.container-expansion {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px 20px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.container-expansion h2 {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* 🔍 Barra de búsqueda */
+.input-busqueda {
+  display: block;
+  margin: 0 auto 25px auto;
+  padding: 10px 14px;
+  width: 70%;
+  max-width: 500px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Lista dentro de los expansion-panels */
+.lista-productos {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lista-productos li {
+  padding: 12px 15px;
+  border-bottom: 1px solid #cceaf4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.lista-productos li:last-child {
+  border-bottom: none;
+}
+
+/* Acciones por producto */
+.acciones-producto {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.acciones-producto button {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 6px;
+  border: 1px solid #333;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.btn-eliminar {
+  background-color: #ffbaba;
+}
+
+.acciones-producto button:hover {
+  opacity: 0.85;
+}
+
+/* Imagen y botón volver */
+.volver-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.catalogo-img {
+  width: 280px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-volver {
+  margin-top: 20px;
+  background-color: #b2e1ec;
+  color: black;
+  border: 2px solid black;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-volver:hover {
+  background-color: #94d4e3;
+}
+
+/* Footer */
+footer {
+  background-color: #dcdcdc;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+footer a {
+  margin: 0 10px;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}

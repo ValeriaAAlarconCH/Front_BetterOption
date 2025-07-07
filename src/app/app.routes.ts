@@ -17,10 +17,8 @@ import {
 } from './components/microempresa/updatemicroempresacomponents/updatemicroempresacomponents';
 import {Listarnotificacion} from './components/notificacion/listarnotificacion/listarnotificacion';
 import {Nuevoeditanotificacion} from './components/notificacion/nuevoeditanotificacion/nuevoeditanotificacion';
-import {Listarproductocatalogo} from './components/productocatalogo/listarproductocatalogo/listarproductocatalogo';
-import {
-  Nuevoeditaproductocatalogo
-} from './components/productocatalogo/nuevoeditaproductocatalogo/nuevoeditaproductocatalogo';
+import { Nuevoeditaproductocatalogo } from './components/productocatalogo/nuevoeditaproductocatalogo/nuevoeditaproductocatalogo';
+import { ListarproductocatalogoComponent } from './components/productocatalogo/listarproductocatalogo/listarproductocatalogo';
 import {
   NuevoEditaCatalogoPromociones
 } from './components/catalogopromociones/nuevoeditacatalogopromociones/nuevoeditacatalogopromociones';
@@ -29,7 +27,7 @@ import {Agregarproducto} from './components/wishlist/nuevoeditawishlist/agregarp
 
 
 export const routes: Routes = [
-  {path : '', component: Principal},
+  { path: '', component: Principal },
 
   {path : 'productos', component: Listarproducto},
   {path : 'productos/registrar', component: Nuevoeditaproducto},
@@ -40,28 +38,26 @@ export const routes: Routes = [
   {path : 'catalogospromociones/registrar', component: NuevoEditaCatalogoPromociones},
   { path: 'catalogospromociones/registrar/:id', component: NuevoEditaCatalogoPromociones },
 
+  { path: 'usuarios', component: Listarusuario },
+  { path: 'usuarios/registrar', component: Nuevoeditausuario },
 
+  { path: 'wishlists', component: Listarwishlist },
+  { path: 'wishlists/registrar', component: Nuevoeditawishlist },
 
-  {path : 'usuarios', component: Listarusuario},
-  {path : 'usuarios/registrar', component: Nuevoeditausuario},
-
-  {path : 'wishlists', component: Listarwishlist},
-  {path : 'wishlists/registrar', component: Nuevoeditawishlist},
-
-  {path : 'notificaciones', component: Listarnotificacion},
-  {path : 'notificaciones/registrar', component: Nuevoeditanotificacion},
+  { path: 'notificaciones', component: Listarnotificacion },
+  { path: 'notificaciones/registrar', component: Nuevoeditanotificacion },
 
   { path: 'categorias', component: ListarcategoriaComponent },
   {path : 'categorias/registrar', component: Nuevoeditacategoria},
   {path : 'categorias/actualizar/:id', component: Nuevoeditacategoria},
 
-  { path: 'microempresas/registrar', component: NuevoeditarmicroempresaComponent },
   { path: 'microempresas', component: ListarmicroempresaComponent },
   { path: 'microempresas/listar', component: ListarmicroempresaComponent },
-  { path: 'microempresas/actualizar/:id', component: updatemicroempresacomponents},
+  { path: 'microempresas/registrar', component: NuevoeditarmicroempresaComponent },
+  { path: 'microempresas/actualizar/:id', component: updatemicroempresacomponents },
 
-  {path : 'productoscatalogos', component: Listarproductocatalogo},
-  {path : 'productoscatalogos/registrar', component: Nuevoeditaproductocatalogo},
+  { path: 'productoscatalogos/registrar', component: Nuevoeditaproductocatalogo },
+  { path: 'productoscatalogos/editar/:id', component: Nuevoeditaproductocatalogo },
+  { path: 'productoscatalogos', component: ListarproductocatalogoComponent },
 
-
-]
+];

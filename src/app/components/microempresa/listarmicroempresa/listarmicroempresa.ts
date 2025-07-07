@@ -15,6 +15,8 @@ export class ListarmicroempresaComponent implements OnInit {
   microempresas: any[] = [];
   indiceSeleccionado: number | null = null;
 
+  filtroMicroempresa: string = ''; // 🔍 NUEVO: campo para buscar por nombre
+
   constructor(
     private router: Router,
     private http: HttpClient
@@ -29,7 +31,6 @@ export class ListarmicroempresaComponent implements OnInit {
       .subscribe({
         next: (data) => {
           console.log('⚠️ Datos recibidos del backend:', data);
-
           const eliminados = JSON.parse(localStorage.getItem('eliminados') || '[]');
           this.microempresas = data.filter(m => !eliminados.includes(m.id_microempresa));
         },
@@ -87,18 +88,23 @@ export class ListarmicroempresaComponent implements OnInit {
     }
 
     const microempresaSeleccionada = this.microempresas[this.indiceSeleccionado];
-
-
     const idMicroempresa = microempresaSeleccionada.id_microempresa;
-
 
     this.router.navigate(['/microempresas/actualizar', idMicroempresa]);
   }
 
-
-
   volver() {
     this.router.navigate(['/']);
   }
-  //cambio
+
+  // ✅ NUEVO: función para devolver las microempresas filtradas por nombre
+  microempresasFiltradas(): any[] {
+    if (!this.filtroMicroempresa.trim()) {
+      return this.microempresas;
+    }
+
+    return this.microempresas.filter(m =>
+      m.nombreNegocio?.toLowerCase().includes(this.filtroMicroempresa.trim().toLowerCase())
+    );
+  }
 }

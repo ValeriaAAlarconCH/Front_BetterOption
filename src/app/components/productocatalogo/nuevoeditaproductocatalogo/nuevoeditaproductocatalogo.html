@@ -1,1 +1,39 @@
-<p>nuevoeditaproductocatalogo works!</p>
+<div class="form-container">
+  <h2>Registrar Producto en Catálogo</h2>
+
+  <!-- Select para elegir producto -->
+  <select [(ngModel)]="productoCatalogo.idProducto">
+    <option value="">Seleccionar producto</option>
+    <option *ngFor="let p of productos" [value]="p.id_producto">
+      {{ p.nombreProducto }}
+    </option>
+  </select>
+
+  <!-- Campo de descuento -->
+  <input
+    type="number"
+    placeholder="Descuento (%)"
+    [(ngModel)]="productoCatalogo.descuentoPorcentaje"
+  />
+
+  <!-- Select para elegir catálogo -->
+  <select [(ngModel)]="productoCatalogo.idCatalogo">
+    <option value="">Seleccionar catálogo</option>
+    <option *ngFor="let c of catalogos" [value]="c.id_catalogopromociones">
+      {{ c.nombreCatalogo }}
+    </option>
+  </select>
+
+  <!-- Botón de registrar -->
+  <button (click)="guardar()">
+    {{ idEditar ? 'Actualizar' : 'Registrar' }}
+  </button>
+
+
+  <br /><br />
+  <img
+    src="assets/img/productocatalogo.png"
+    alt="Imagen producto catálogo"
+    width="200"
+  />
+</div>
