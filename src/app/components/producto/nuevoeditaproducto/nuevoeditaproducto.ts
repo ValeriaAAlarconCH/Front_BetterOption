@@ -62,21 +62,43 @@ export class Nuevoeditaproducto {
       stock: ['', Validators.required],
       imagen: ['', Validators.required],
       microempresa: ['', Validators.required],
-      categoria: ['', Validators.required]
+      categoria: ['', Validators.required],
     });
   }
 
   ngOnInit() {
-    this.route.params.subscribe(data => {
+    this.route.params.subscribe((data) => {
       this.id = data['id'];
       this.edicion = this.id != null;
-      if (this.edicion) {
-        this.cargaForm();
-      }
-    });
 
-    this.categoriaService.list().subscribe(data => this.categorias = data);
-    this.microempresaService.list().subscribe(data => this.microempresas = data);
+      // Cargar listas y luego el producto si se está editando
+      this.categoriaService.list().subscribe((cat) => {
+        this.categorias = cat;
+
+        this.microempresaService.list().subscribe((micros) => {
+          this.microempresas = micros;
+
+          if (this.edicion) {
+            this.cargaForm();
+          }
+        });
+      });
+    });
+  }
+
+  cargaForm() {
+    this.productoService.listId(this.id).subscribe((data: Producto) => {
+      this.imagenPreview = data.imagen;
+      this.productoForm.patchValue({
+        nombreProducto: data.nombreProducto,
+        descripcion: data.descripcion,
+        precio: data.precio,
+        stock: data.stock,
+        imagen: data.imagen,
+        microempresa: data.microempresadto?.id_microempresa,
+        categoria: data.categoriadto?.id_categoria,
+      });
+    });
   }
 
   cargarImagen(event: any) {
@@ -92,28 +114,13 @@ export class Nuevoeditaproducto {
     }
   }
 
-  cargaForm() {
-    this.productoService.listId(this.id).subscribe((data: Producto) => {
-      this.imagenPreview = data.imagen;
-      this.productoForm.patchValue({
-        nombreProducto: data.nombreProducto,
-        descripcion: data.descripcion,
-        precio: data.precio,
-        stock: data.stock,
-        imagen: data.imagen,
-        microempresa: data.microempresadto.id_microempresa,
-        categoria: data.categoriadto.id_categoria
-      });
-    });
-  }
-
   onSubmit() {
     if (this.productoForm.valid) {
       const producto: Producto = {
         ...new Producto(),
         ...this.productoForm.value,
         microempresadto: { id_microempresa: this.productoForm.value.microempresa } as Microempresa,
-        categoriadto: { id_categoria: this.productoForm.value.categoria } as Categoria
+        categoriadto: { id_categoria: this.productoForm.value.categoria } as Categoria,
       };
 
       const callback = () => {
@@ -128,7 +135,11 @@ export class Nuevoeditaproducto {
         this.productoService.insert(producto).subscribe(callback);
       }
     } else {
-      console.log("Formulario no válido");
+      console.log('Formulario no válido');
     }
+  }
+
+  cancelar() {
+    this.router.navigate(['/productos']);
   }
 }

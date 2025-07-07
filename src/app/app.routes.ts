@@ -34,6 +34,7 @@ export const routes: Routes = [
   {path : 'productos', component: Listarproducto},
   {path : 'productos/registrar', component: Nuevoeditaproducto},
   { path: 'wishlist/:id/agregarproducto', component: Agregarproducto},
+  { path: 'productos/actualizar/:id', component: Nuevoeditaproducto },
 
   {path : 'catalogospromociones', component: Listarcatalogopromociones},
   {path : 'catalogospromociones/registrar', component: NuevoEditaCatalogoPromociones},
