@@ -1,0 +1,21 @@
+<div class="container-registro">
+  <div class="formulario">
+    <h2>Actualizar Categoría</h2>
+
+    <input type="text" placeholder="Nombre de la categoría" [(ngModel)]="categoria.nombreCategoria">
+    <input type="text" placeholder="Descripción" [(ngModel)]="categoria.descripcion">
+
+    <button class="btn-registrar" (click)="actualizar()">Actualizar</button>
+  </div>
+
+  <div class="imagen">
+    <img src="assets/img/categoria.png" alt="Imagen categoría">
+    <button class="btn-microempresa" (click)="irAListaCategorias()">Categorías</button>
+  </div>
+</div>
+
+<footer class="footer">
+  <a href="#">Términos</a>
+  <a href="#">Privacidad</a>
+  <a href="#">Contacto</a>
+</footer>
