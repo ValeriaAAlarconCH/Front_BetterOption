@@ -1,25 +1,22 @@
-.background {
-  background-color: #e3f7ff;
-  height: calc(100vh - 64px); /* Ajusta según altura de navbar */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+body {
+  background-color: #e3f2fd;
+  font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
-.card {
-  background-color: white;
+.form-container {
+  max-width: 650px;
+  margin: 40px auto;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  max-width: 450px;
+  background-color: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  border-left: 6px solid #42a5f5;
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 20px;
-  font-weight: bold;
+  color: #0d47a1;
+  margin-bottom: 25px;
 }
 
 .full-width {
@@ -27,18 +24,35 @@ h2 {
   margin-bottom: 20px;
 }
 
-.custom-btn {
-  width: 100%;
-  background-color: #d0f0ff;
-  color: black;
-  font-weight: bold;
-  border: 1px solid black;
+mat-form-field {
+  background-color: #f5faff;
+  border-radius: 6px;
 }
-.form-container {
-  max-width: 500px;
-  margin: 30px auto;
-  background: #f9f9f9;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+.btns {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+button[type="submit"] {
+  background-color: #1976d2;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 18px;
+  border-radius: 8px;
+}
+
+button[type="submit"]:hover {
+  background-color: #1565c0;
+}
+
+button[color="warn"] {
+  background-color: #78909c;
+  color: #fff;
+}
+
+button[color="warn"]:hover {
+  background-color: #607d8b;
 }
