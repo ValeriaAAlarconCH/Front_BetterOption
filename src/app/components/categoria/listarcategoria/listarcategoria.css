@@ -41,3 +41,23 @@ h2 {
 button {
   margin-right: 5px;
 }
+
+/* Título con imagen para Categorías */
+.titulo-categorias {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.icono-categoria {
+  width: 40px;
+  height: 40px;
+}
+
+.titulo-categorias h2 {
+  margin: 0;
+  font-size: 26px;
+  color: #2d4a58;
+}

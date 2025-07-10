@@ -135,3 +135,23 @@ mat-panel-title {
     max-width: 300px;
   }
 }
+
+/* Título de la sección de wishlist */
+.titulo-wishlist {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.icono-wishlist {
+  width: 40px;
+  height: 40px;
+}
+
+.titulo-wishlist h2 {
+  font-size: 26px;
+  color: #0d47a1;
+  margin: 0;
+}

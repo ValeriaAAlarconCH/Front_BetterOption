@@ -16,12 +16,24 @@ body {
   box-shadow: 0 0 15px rgba(0, 105, 192, 0.1);
 }
 
-/* Título */
-.usuario-container h2 {
-  text-align: center;
+/* Título con imagen */
+.titulo-usuario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.titulo-usuario img.icono-usuario {
+  width: 40px;
+  height: 40px;
+}
+
+.titulo-usuario h2 {
   font-size: 26px;
   color: #0d47a1;
-  margin-bottom: 30px;
+  margin: 0;
 }
 
 /* Barra de búsqueda */
@@ -102,5 +114,13 @@ mat-icon {
 
   .barra-busqueda {
     width: 90%;
+  }
+
+  .titulo-usuario {
+    flex-direction: column;
+  }
+
+  .titulo-usuario img.icono-usuario {
+    margin-bottom: 10px;
   }
 }

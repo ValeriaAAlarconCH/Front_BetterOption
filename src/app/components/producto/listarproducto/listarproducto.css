@@ -62,3 +62,23 @@ button[color="warn"] {
   background-color: #f44336;
   color: white;
 }
+
+/* Título de la sección de productos */
+.titulo-productos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 30px auto 10px;
+}
+
+.icono-producto {
+  width: 40px;
+  height: 40px;
+}
+
+.titulo-productos h2 {
+  font-size: 26px;
+  color: #0d47a1;
+  margin: 0;
+}
