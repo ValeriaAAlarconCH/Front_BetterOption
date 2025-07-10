@@ -1,36 +1,44 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { CatalogoPromociones } from '../../../models/catalogopromociones';
-import { CatalogoPromocionesService } from '../../../services/CatalogoPromocionesService';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import {MatButton, MatIconButton} from '@angular/material/button';
+import {Component, OnInit} from '@angular/core';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
+import {CatalogoPromociones} from '../../../models/catalogopromociones';
+import {CatalogoPromocionesService} from '../../../services/CatalogoPromocionesService';
+import {CommonModule} from '@angular/common';
+import {Router} from '@angular/router';
+import {MatButton, MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {FormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 
 @Component({
   selector: 'app-listarcatalogopromociones',
   templateUrl: './listarcatalogopromociones.html',
   styleUrls: ['./listarcatalogopromociones.css'],
+  standalone: true,
   imports: [
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
     MatButton,
-    MatIconButton,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    FormsModule,
+    MatInputModule,
+    MatFormFieldModule,
   ]
 })
 export class Listarcatalogopromociones implements OnInit {
-  displayedColumns: string[] = ['id', 'nombreCatalogo', 'descripcion', 'fechaInicio', 'fechaFin'];
-  dataSource: MatTableDataSource<CatalogoPromociones> = new MatTableDataSource<CatalogoPromociones>();
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  mostrarFavoritos = false;
-  contadorActivas = 0;
+  dataOriginal: CatalogoPromociones[] = [];
+  dataSource: CatalogoPromociones[] = [];
+  mostrarFavoritos: boolean = false;
+  contadorActivas: number = 0;
+  filtroTexto: string = '';
 
   constructor(
     private catalogoService: CatalogoPromocionesService,
@@ -38,61 +46,66 @@ export class Listarcatalogopromociones implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const eliminados = JSON.parse(localStorage.getItem('catalogosEliminados') || '[]');
-    const favoritos = JSON.parse(localStorage.getItem('favoritosCatalogos') || '[]');
-
-    this.catalogoService.list().subscribe((data) => {
-      let filtrados = data.filter(item => !eliminados.includes(item.id_catalogopromociones));
-
-      if (this.mostrarFavoritos) {
-        filtrados = filtrados.filter(item => favoritos.includes(item.id_catalogopromociones));
+    this.catalogoService.list().subscribe({
+      next: (data) => {
+        this.dataOriginal = data;
+        this.aplicarFiltros();
+      },
+      error: (err) => {
+        console.error('Error al obtener catálogos:', err);
       }
-
-      this.contadorActivas = filtrados.filter(item => new Date(item.fechaFin) > new Date()).length;
-
-      this.dataSource = new MatTableDataSource<CatalogoPromociones>(filtrados);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      this.dataSource.filterPredicate = (data: CatalogoPromociones, filter: string) => {
-        const texto = filter.trim().toLowerCase();
-
-        const nombre = data.nombreCatalogo?.toLowerCase() || '';
-        const descripcion = data.descripcion?.toLowerCase() || '';
-        const micro = (data.microempresa as any)?.nombreNegocio?.toLowerCase() || '';
-
-        return nombre.includes(texto) || descripcion.includes(texto) || micro.includes(texto);
-      };
-
     });
   }
 
-  aplicarFiltro(event: Event): void {
-    const valor = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = valor.trim().toLowerCase();
+  aplicarFiltros(): void {
+    const eliminados = JSON.parse(localStorage.getItem('catalogosEliminados') || '[]');
+    const favoritos = JSON.parse(localStorage.getItem('favoritosCatalogos') || '[]');
+
+    let filtrados = this.dataOriginal.filter(c => !eliminados.includes(c.id_catalogopromociones));
+
+    if (this.mostrarFavoritos) {
+      filtrados = filtrados.filter(c => favoritos.includes(c.id_catalogopromociones));
+    }
+
+    if (this.filtroTexto.trim() !== '') {
+      const texto = this.filtroTexto.trim().toLowerCase();
+      filtrados = filtrados.filter(item => {
+        return (
+          item.nombreCatalogo?.toLowerCase().includes(texto) ||
+          item.descripcion?.toLowerCase().includes(texto) ||
+          item.microempresadto?.nombreNegocio?.toLowerCase().includes(texto)
+        );
+      });
+    }
+
+    this.dataSource = filtrados;
+    this.contadorActivas = filtrados.filter(c => new Date(c.fechaFin) > new Date()).length;
   }
 
   editar(id: number): void {
-    this.router.navigate([`/catalogospromociones/registrar/${id}`]);
+    this.router.navigate(['/catalogospromociones/actualizar', id]);
   }
 
   eliminar(id: number): void {
-    if (confirm('¿Estás seguro de eliminar este catálogo?')) {
+    if (confirm('¿Deseas eliminar este catálogo?')) {
       let eliminados = JSON.parse(localStorage.getItem('catalogosEliminados') || '[]');
-      eliminados.push(id);
-      localStorage.setItem('catalogosEliminados', JSON.stringify(eliminados));
-      this.dataSource.data = this.dataSource.data.filter(item => item.id_catalogopromociones !== id);
-      this.contadorActivas = this.dataSource.data.filter(item => new Date(item.fechaFin) > new Date()).length;
+      if (!eliminados.includes(id)) {
+        eliminados.push(id);
+        localStorage.setItem('catalogosEliminados', JSON.stringify(eliminados));
+      }
+      this.aplicarFiltros();
     }
   }
 
   toggleFavorito(id: number): void {
     let favoritos = JSON.parse(localStorage.getItem('favoritosCatalogos') || '[]');
     if (favoritos.includes(id)) {
-      favoritos = favoritos.filter((item: number) => item !== id);
+      favoritos = favoritos.filter((fid: number) => fid !== id);
     } else {
       favoritos.push(id);
     }
     localStorage.setItem('favoritosCatalogos', JSON.stringify(favoritos));
+    this.aplicarFiltros();
   }
 
   esFavorito(id: number): boolean {
@@ -102,18 +115,17 @@ export class Listarcatalogopromociones implements OnInit {
 
   alternarFavoritos(): void {
     this.mostrarFavoritos = !this.mostrarFavoritos;
-    this.ngOnInit();
+    this.aplicarFiltros();
   }
+
   obtenerEstadoPromocion(fechaInicio: Date, fechaFin: Date): string {
     const hoy = new Date();
     const inicio = new Date(fechaInicio);
     const fin = new Date(fechaFin);
-
     if (hoy < inicio) return 'No iniciada';
     if (hoy > fin) return '⛔ Vencido';
-
     const dias = this.diasRestantes(fechaFin);
-    return dias <= 3 ? '⚠️ Por vencer' : '✅ Activo';
+    return dias <= 3 ? '⚠ Por vencer' : '✅ Activo';
   }
 
   diasRestantes(fechaFin: Date): number {
@@ -122,7 +134,4 @@ export class Listarcatalogopromociones implements OnInit {
     const diff = fin.getTime() - hoy.getTime();
     return Math.ceil(diff / (1000 * 60 * 60 * 24));
   }
-
 }
-
-

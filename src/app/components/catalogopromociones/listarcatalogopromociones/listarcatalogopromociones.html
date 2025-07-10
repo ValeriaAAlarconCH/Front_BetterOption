@@ -1,48 +1,30 @@
 <div class="barra-superior">
-  <div class="lado-izquierdo">
-    <input type="text" placeholder="🔍 Buscar catálogo..." (input)="aplicarFiltro($event)" />
-    <button mat-raised-button color="primary" (click)="alternarFavoritos()">
-      {{ mostrarFavoritos ? '✔️ Ver Todos' : '⭐ Ver Favoritos' }}
-    </button>
-  </div>
-
-  <div class="lado-derecho">
-    <span class="contador-activas">
-      🧮 Promociones activas: <strong>{{ contadorActivas }}</strong>
-    </span>
-  </div>
+  <input type="text" [(ngModel)]="filtroTexto" (input)="aplicarFiltros()" placeholder="🔍 Buscar catálogo..." />
+  <button mat-raised-button color="primary" (click)="alternarFavoritos()">
+    {{ mostrarFavoritos ? '✔ Ver Todos' : '⭐ Ver Favoritos' }}
+  </button>
+  <span class="contador-activas">🧮 Activas: <strong>{{ contadorActivas }}</strong></span>
 </div>
 
-
 <div class="container-listado">
-  <div *ngFor="let item of dataSource.filteredData" class="card-promocion" [ngClass]="obtenerEstadoPromocion(item.fechaInicio, item.fechaFin)"
-  >
-    <h3>
-      📌 {{ item.nombreCatalogo }}
-
-      <span class="estado-promocion">
-    {{ obtenerEstadoPromocion(item.fechaInicio, item.fechaFin) }}
-  </span>
-
-      <p class="estado-promocion" *ngIf="diasRestantes(item.fechaFin) > 0">
-        ⏳ Faltan {{ diasRestantes(item.fechaFin) }} días para finalizar
-      </p>
-
-      <button mat-icon-button (click)="toggleFavorito(item.id_catalogopromociones)">
-        {{ esFavorito(item.id_catalogopromociones) ? '⭐' : '☆' }}
+  <mat-card *ngFor="let item of dataSource" class="catalogo-card">
+    <mat-card-header>
+      <mat-card-title>{{ item.nombreCatalogo }}</mat-card-title>
+      <mat-card-subtitle>{{ obtenerEstadoPromocion(item.fechaInicio, item.fechaFin) }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p><strong>Descripción:</strong> {{ item.descripcion }}</p>
+      <p><strong>Microempresa:</strong> {{ item.microempresadto.nombreNegocio || 'N/A' }}</p>
+      <p><strong>Inicio:</strong> {{ item.fechaInicio | date: 'yyyy-MM-dd' }}</p>
+      <p><strong>Fin:</strong> {{ item.fechaFin | date: 'yyyy-MM-dd' }}</p>
+      <p *ngIf="diasRestantes(item.fechaFin) > 0">⏳ Faltan {{ diasRestantes(item.fechaFin) }} días</p>
+    </mat-card-content>
+    <mat-card-actions class="acciones">
+      <button mat-raised-button color="accent" (click)="editar(item.id_catalogopromociones)">✏ Editar</button>
+      <button mat-raised-button color="warn" (click)="eliminar(item.id_catalogopromociones)">🗑 Eliminar</button>
+      <button mat-icon-button (click)="toggleFavorito(item.id_catalogopromociones)" aria-label="Favorito">
+        <mat-icon>{{ esFavorito(item.id_catalogopromociones) ? 'star' : 'star_border' }}</mat-icon>
       </button>
-    </h3>
-
-
-    <p>📄 <strong>Descripción:</strong> {{ item.descripcion }}</p>
-    <p>🏢 <strong>Microempresa:</strong> {{ item.microempresa?.nombreNegocio || 'N/A' }}</p>
-    <p>📅 <strong>Fecha de Inicio:</strong> {{ item.fechaInicio | date: 'yyyy-MM-dd' }}</p>
-    <p>📅 <strong>Fecha de Fin:</strong> {{ item.fechaFin | date: 'yyyy-MM-dd' }}</p>
-
-
-    <div class="acciones-botones">
-      <button mat-raised-button color="primary" (click)="editar(item.id_catalogopromociones)">✏️ Editar</button>
-      <button mat-raised-button color="warn" (click)="eliminar(item.id_catalogopromociones)">🗑️ Eliminar</button>
-    </div>
-  </div>
+    </mat-card-actions>
+  </mat-card>
 </div>

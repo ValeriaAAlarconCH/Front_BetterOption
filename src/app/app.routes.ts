@@ -38,7 +38,7 @@ export const routes: Routes = [
 
   {path : 'catalogospromociones', component: Listarcatalogopromociones},
   {path : 'catalogospromociones/registrar', component: NuevoEditaCatalogoPromociones},
-  { path: 'catalogospromociones/registrar/:id', component: NuevoEditaCatalogoPromociones },
+  { path: 'catalogospromociones/actualizar/:id', component: NuevoEditaCatalogoPromociones },
 
   { path: 'usuarios', component: ListarusuarioComponent },
   { path: 'usuarios/registrar', component: Nuevoeditausuario },

@@ -1,18 +1,11 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { CategoriaService } from '../../../services/CategoriaService';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { MatButtonModule } from '@angular/material/button';
-import {MatInput, MatLabel} from '@angular/material/input';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatSort, MatSortModule} from '@angular/material/sort';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import {Router} from '@angular/router';
+import {CategoriaService} from '../../../services/CategoriaService';
+import {MatButtonModule} from '@angular/material/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatFormField} from '@angular/material/form-field';
-import {Producto} from '../../../models/producto';
-import {Categoria} from '../../../models/categoria';
 import {CommonModule} from '@angular/common';
 
 @Component({
@@ -25,9 +18,6 @@ import {CommonModule} from '@angular/common';
     MatPaginatorModule,
     MatSortModule,
     MatButtonModule,
-    MatFormField,
-    MatInput,
-    MatLabel,
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
