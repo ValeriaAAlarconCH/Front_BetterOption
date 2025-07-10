@@ -48,9 +48,11 @@ export class Listarproducto {
   ngOnInit() {
     this.productoService.getListaCambio().subscribe({
       next: (data) => {
-        const eliminados = JSON.parse(localStorage.getItem('productosEliminados') || '[]');
-        this.lista = data.filter(p => !eliminados.includes(p.id_producto));
+        this.lista = data;
         this.listaFiltrada = [...this.lista];
+      },
+      error: (err) => {
+        console.error('Error al obtener productos', err);
       }
     });
     this.productoService.actualizarLista();
@@ -75,14 +77,9 @@ export class Listarproducto {
   }
 
   eliminar(id: number): void {
-    const index = this.lista.findIndex(p => p.id_producto === id);
-    if (index !== -1) {
-      const eliminados = JSON.parse(localStorage.getItem('productosEliminados') || '[]');
-      eliminados.push(id);
-      localStorage.setItem('productosEliminados', JSON.stringify(eliminados));
-      this.lista.splice(index, 1);
-      this.aplicarFiltro();
-    }
+    this.productoService.delete(id).subscribe(() => {
+      this.productoService.actualizarLista();
+    });
   }
 
   aplicarFiltro(): void {

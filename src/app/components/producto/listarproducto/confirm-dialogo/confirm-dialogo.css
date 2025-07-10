@@ -1,17 +1,31 @@
-mat-dialog-content {
+.dialog-container {
+  padding: 20px;
+  background-color: #e3f2fd; /* Azul claro */
+  border-radius: 10px;
+  min-width: 300px;
+}
+
+.titulo {
+  color: #0d47a1; /* Azul intenso */
+  margin-bottom: 10px;
+}
+
+.contenido p {
   font-size: 16px;
-  padding: 20px 0;
-  font-family: inherit;
+  color: #37474f; /* Gris oscuro */
 }
 
-mat-dialog-actions {
-  padding: 10px 20px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
+.acciones {
+  margin-top: 20px;
 }
 
-button {
+.btn-cancelar {
+  color: #1976d2;
   font-weight: bold;
-  padding: 6px 16px;
+}
+
+.btn-eliminar {
+  font-weight: bold;
+  color: white;
+  background-color: #e53935;
 }

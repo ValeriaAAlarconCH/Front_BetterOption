@@ -1,6 +1,12 @@
-<h1>BETTER OPTION</h1>
-<h2>TU ALIADO PARA LAS COMPRAS INTELIGENTES</h2>
+<div class="header">
+  <img src="assets/BetterOptionLogo.png" alt="Logo Better Option" class="logo" />
+  <div class="titulo">
+    <h1>BETTER OPTION</h1>
+    <h2>TU ALIADO PARA LAS COMPRAS INTELIGENTES</h2>
+  </div>
+</div>
 
+<!-- Menú de navegación -->
 <nav>
   <a [routerLink]="'/'">Principal</a>
 
@@ -22,10 +28,10 @@
     <button mat-menu-item [routerLink]="'/catalogospromociones/registrar'">Registrar Descuento</button>
   </mat-menu>
 
-  <button mat-button [matMenuTriggerFor]="menuCatalogos">Catalogos</button>
+  <button mat-button [matMenuTriggerFor]="menuCatalogos">Catálogos</button>
   <mat-menu #menuCatalogos="matMenu">
-    <button mat-menu-item [routerLink]="'/productoscatalogos'">Listar Catalogos</button>
-    <button mat-menu-item [routerLink]="'/productoscatalogos/registrar'">Registrar Catalogo</button>
+    <button mat-menu-item [routerLink]="'/productoscatalogos'">Listar Catálogos</button>
+    <button mat-menu-item [routerLink]="'/productoscatalogos/registrar'">Registrar Catálogo</button>
   </mat-menu>
 
   <button mat-button [matMenuTriggerFor]="menuUsuarios">Usuarios</button>
@@ -43,13 +49,13 @@
   <button mat-button [matMenuTriggerFor]="menuNotificaciones">Notificaciones</button>
   <mat-menu #menuNotificaciones="matMenu">
     <button mat-menu-item [routerLink]="'/notificaciones'">Listar Notificaciones</button>
-    <button mat-menu-item [routerLink]="'/notificaciones/registrar'">Registrar Notificacion</button>
+    <button mat-menu-item [routerLink]="'/notificaciones/registrar'">Registrar Notificación</button>
   </mat-menu>
 
   <button mat-button [matMenuTriggerFor]="menuCategorias">Categorías</button>
   <mat-menu #menuCategorias="matMenu">
-    <button mat-menu-item [routerLink]="'/categorias'">Listar Categorias</button>
-    <button mat-menu-item [routerLink]="'/categorias/registrar'">Registrar Categoria</button>
+    <button mat-menu-item [routerLink]="'/categorias'">Listar Categorías</button>
+    <button mat-menu-item [routerLink]="'/categorias/registrar'">Registrar Categoría</button>
   </mat-menu>
 </nav>
 
