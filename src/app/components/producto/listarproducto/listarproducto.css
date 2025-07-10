@@ -16,8 +16,9 @@
   max-width: 350px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
   border-radius: 10px;
-  background-color: #ffffff;
+  background-color: #f0f8ff;
   padding: 10px;
+  border-left: 5px solid #1e88e5;
 }
 
 /* Ajuste de imagen */
@@ -37,11 +38,12 @@ mat-card-content p {
 mat-card-title {
   font-size: 18px;
   font-weight: bold;
+  color: #0d47a1;
 }
 
 mat-card-subtitle {
   font-size: 14px;
-  color: #666;
+  color: #1976d2;
 }
 
 /* Botones dentro de cada card */
@@ -49,4 +51,14 @@ mat-card-subtitle {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
+}
+
+button[color="primary"] {
+  background-color: #2196f3;
+  color: white;
+}
+
+button[color="warn"] {
+  background-color: #f44336;
+  color: white;
 }

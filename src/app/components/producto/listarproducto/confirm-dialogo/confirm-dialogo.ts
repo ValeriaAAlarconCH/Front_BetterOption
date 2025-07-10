@@ -7,11 +7,15 @@ import {
   MatDialogRef,
   MatDialogTitle
 } from '@angular/material/dialog';
+import {CommonModule} from '@angular/common';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-confirm-dialogo',
   standalone: true,
   imports: [
+    CommonModule,
+    MatButtonModule,
     MatDialogContent,
     MatDialogActions,
     MatDialogActions,

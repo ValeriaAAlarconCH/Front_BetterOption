@@ -1,18 +1,31 @@
 /* Encabezado */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 15px;
+}
+
+.logo {
+  height: 60px;
+  width: auto;
+}
+
+.titulo {
+  text-align: center;
+}
+
 h1 {
   margin: 0;
-  padding: 10px;
   font-size: 2em;
   color: #2c3e50;
-  text-align: center;
 }
 
 h2 {
   margin: 0;
-  padding: 5px;
   font-size: 1.2em;
   color: #34495e;
-  text-align: center;
 }
 
 /* Barra de navegación */
@@ -40,7 +53,7 @@ nav button:hover {
   color: #f1c40f;
 }
 
-/* Línea divisora entre botones opcional */
+/* Separador opcional entre botones */
 nav a + a::before,
 nav button + button::before {
   content: "|";
